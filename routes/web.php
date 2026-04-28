@@ -12,8 +12,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\UserController;
 
+use App\Http\Controllers\CheckoutController;
+
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::inertia('cart', 'cart')->name('cart');
+Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
