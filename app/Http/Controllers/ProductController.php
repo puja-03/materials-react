@@ -13,8 +13,31 @@ class ProductController extends Controller
     public function index()
     {
         return Inertia::render('products/index', [
-            'products' => Product::with('category')->get(),
+            'products' => Product::with('category')->latest()->get(),
             'categories' => Category::all(),
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('products/create', [
+            'categories' => Category::all(),
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
+            'image_url' => 'nullable|url',
+        ]);
+
+        Product::create($validated);
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
 }
