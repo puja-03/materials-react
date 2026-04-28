@@ -42,6 +42,8 @@ export default function Cart() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        const items = cartItems.map(item => ({ product_id: item.product_id, quantity: item.quantity }));
+        setData('items', items as any);
         post(route('checkout.store'));
     };
 
