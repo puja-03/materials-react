@@ -36,8 +36,12 @@ class ProductController extends Controller
             'image_url' => 'nullable|url',
         ]);
 
+        $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']) . '-' . rand(1000, 9999);
+        $validated['vendor_name'] = auth()->user()->name;
+        $validated['unit'] = 'pcs';
+
         Product::create($validated);
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully!');
+        return redirect()->route('dashboard')->with('success', 'Product listed successfully in marketplace!');
     }
 }
