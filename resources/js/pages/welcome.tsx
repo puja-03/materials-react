@@ -22,14 +22,20 @@ export default function Welcome() {
                                 Search handles, locks, screws & fittings directly from manufacturers and trusted shops. No hidden fees, no brokers—your shop contacts stay private.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                                <button className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:shadow-lg transition-all active:scale-95">
-                                    <span className="material-symbols-outlined">download</span>
-                                    Download App
-                                </button>
-                                <button className="flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 shadow-sm">
+                                <Link
+                                    href={route('products.index')}
+                                    className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:shadow-lg transition-all active:scale-95"
+                                >
+                                    <span className="material-symbols-outlined">shopping_basket</span>
+                                    Explore Materials
+                                </Link>
+                                <Link
+                                    href={route('register')}
+                                    className="flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 shadow-sm"
+                                >
                                     <span className="material-symbols-outlined">storefront</span>
                                     Register Your Shop
-                                </button>
+                                </Link>
                             </div>
                         </div>
                         <div className="flex-1 relative">
