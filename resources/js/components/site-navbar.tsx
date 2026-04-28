@@ -17,6 +17,13 @@ export default function SiteNavbar() {
                     <Link className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-foreground transition-colors duration-200" href="#">Rentals</Link>
                 </div>
                 <div className="flex items-center gap-4">
+                    <Link
+                        href={route('cart')}
+                        className="p-2 text-slate-600 dark:text-slate-400 hover:text-primary transition-all relative"
+                    >
+                        <span className="material-symbols-outlined text-[24px]">shopping_cart</span>
+                        <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900">2</span>
+                    </Link>
                     {auth.user ? (
                         <Link
                             href={dashboard()}

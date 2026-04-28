@@ -1,9 +1,20 @@
 import { Head } from '@inertiajs/react';
+import SiteNavbar from '@/components/site-navbar';
+import SiteFooter from '@/components/site-footer';
 
 export default function UserManagement({ users, total_users }: any) {
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="flex flex-col min-h-screen bg-surface text-on-surface">
             <Head title="User Management - Admin Console" />
+            <SiteNavbar />
+
+            <main className="flex-grow p-6 max-w-7xl mx-auto w-full space-y-8 animate-in fade-in duration-500">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">User Management</h2>
+                        <p className="text-sm text-slate-500">Monitor and verify platform participants</p>
+                    </div>
+                    {/* ... rest of the top content ... */}
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
