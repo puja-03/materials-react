@@ -18,6 +18,7 @@ class DashboardController extends Controller
             'total_products' => Product::count(),
             'total_users' => User::count(),
             'recent_orders' => Order::with('user')->latest()->take(5)->get(),
+            'products' => Product::with('category')->latest()->take(10)->get(),
         ]);
     }
 }

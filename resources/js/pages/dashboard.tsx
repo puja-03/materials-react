@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { dashboard } from '@/routes';
 
-export default function Dashboard({ total_orders, total_products, total_users, recent_orders }: any) {
+export default function Dashboard({ total_orders, total_products, total_users, recent_orders, products }: any) {
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
             <Head title="Shopkeeper Dashboard - Materials Market" />
@@ -141,10 +141,13 @@ export default function Dashboard({ total_orders, total_products, total_users, r
                                 type="text"
                             />
                         </div>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:brightness-110 transition-all whitespace-nowrap">
+                        <Link
+                            href={route('products.create')}
+                            className="bg-primary text-white px-4 py-2 rounded-lg font-bold text-sm hover:brightness-110 flex items-center gap-2"
+                        >
                             <span className="material-symbols-outlined text-[18px]">add</span>
                             Add New
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="overflow-x-auto">
@@ -159,11 +162,57 @@ export default function Dashboard({ total_orders, total_products, total_users, r
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                            <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                <td className="px-6 py-4" colSpan={5}>
-                                    <p className="text-center text-slate-500 py-4">Inventory data integration in progress...</p>
-                                </td>
-                            </tr>
+                            {products.length > 0 ? (
+                                products.map((product: any) => (
+                                    <tr key={product.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden border border-slate-200 dark:border-slate-700">
+                                                    <img src={product.image_url} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold text-slate-900 dark:text-white line-clamp-1">{product.name}</span>
+                                                    <span className="text-[10px] text-slate-500 font-medium uppercase tracking-tight">{product.category.name}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="font-bold text-slate-900 dark:text-white">₹{parseFloat(product.price).toLocaleString()}</span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                                    <span className="material-symbols-outlined text-[12px]">verified_user</span>
+                                                </div>
+                                                <span className="text-xs text-slate-600 dark:text-slate-400">Verified Vendor</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
+                                                product.stock > 10 ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+                                            }`}>
+                                                {product.stock > 10 ? 'In Stock' : 'Low Stock'}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all">
+                                                    <span className="material-symbols-outlined text-[18px]">edit</span>
+                                                </button>
+                                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-destructive transition-all">
+                                                    <span className="material-symbols-outlined text-[18px]">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <td className="px-6 py-4" colSpan={5}>
+                                        <p className="text-center text-slate-500 py-4 font-medium">No inventory items found. Add your first product!</p>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
