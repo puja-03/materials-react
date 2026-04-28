@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Materials Market - Product Listing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#586377",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container": "#eceef0",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#545f73",
+                        "on-background": "#191c1e",
+                        "tertiary": "#005338",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#4f46e5",
+                        "surface": "#f7f9fb",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed": "#0f0069",
+                        "on-surface-variant": "#464555",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#777587",
+                        "on-tertiary-fixed": "#002113",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#006e4b",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary-fixed": "#e2dfff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d5e0f8",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-container": "#67f4b7",
+                        "surface-variant": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "primary": "#3525cd",
+                        "tertiary-fixed-dim": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "unit": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "small": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h2": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "small": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 sticky top-0 z-50 shadow-sm">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-6">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Materials Market</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1 font-inter text-sm font-medium" href="#">Materials</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200 font-inter text-sm font-medium" href="#">Bulk Orders</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200 font-inter text-sm font-medium" href="#">Rentals</a>
+</nav>
+</div>
+<div class="flex-1 max-w-md mx-6 hidden sm:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600">search</span>
+<input class="w-full bg-slate-50 border-slate-200 rounded-lg py-2 pl-10 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm" placeholder="Search industrial hardware..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer hover:text-indigo-600">photo_camera</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-inter text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-700">Login</button>
+<button class="bg-primary-container text-white px-4 py-2 rounded-lg font-inter text-sm font-medium hover:bg-indigo-700 transition-all shadow-sm">Shop Sign Up</button>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-6 py-8 pb-32">
+<!-- Search for Mobile -->
+<div class="sm:hidden mb-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-white border-slate-200 rounded-lg py-3 pl-10 pr-10 shadow-sm" placeholder="Search hardware..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">photo_camera</span>
+</div>
+</div>
+<!-- Category Chips -->
+<div class="mb-8">
+<div class="flex overflow-x-auto no-scrollbar gap-3 pb-2">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-indigo-600 text-white font-label-md text-sm shadow-md transition-transform active:scale-95">All Materials</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Handles</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Locks</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Screws</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Hinges</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Tools</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-600 font-label-md text-sm hover:border-indigo-300 hover:text-indigo-600 transition-all">Fittings</button>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close-up of a luxury satin brass door handle on a white minimalist door with architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHpxpjOQlHcJ6we4kv9anRRgxQDa85NhGj62jbmN2WimOFgRaWA1lhiPMmKGC99F5cBWCUTpuPs-2pyS1bi3ifBqkAypNLiFOGwr8x6nXYmW2jeyQ34jiAg4jT23eOasihSdzMvfP5A8x3yEA4IL5cdXTyzDunbnEbLceZOETBFOKXxBtfrImnciG3BJ0jySLkdUeEw7chQHYLaPCAw6k-wITcpEmQNU7MuPkpDiK1BOQ2Ko7Bf5WnZ86JxaUOFTNFe1pQbdkEnvAG"/>
+<span class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">In Stock</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">Premium Satin Brass Door Handle</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Industrial Grade 304 Stainless Steel</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹2,499</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="modern matte black smart electronic deadbolt lock mounted on a dark wood door in a contemporary setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVoO2Iuc2q6St-aajak7oQYUUf9YYyWkglErdXIcsVroPLzW7K6917fnomotSG69U1J4s9q5DydS056eM8NDfKjXqF5475soxQNruFiDlrRdV6eJ8lVl_VTkzjvDn75H7uY7wc-K0-tlpazZxgTXa36v1Ei5-zPZw1qtP4GaBuhXQ86rDyDYeVIIP_EFwJHWMwy9PJw7Q6JnbJDUCyyrs8Ldj4CyefGC6vTyojYicsIC4IzIL4CGBw0rGGtacDS6NRQxqD6oNiqpc1"/>
+<span class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">In Stock</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">Digital Smart Deadbolt Lock</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Bluetooth &amp; Fingerprint Enabled</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹8,990</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="macro photograph of a pile of shiny galvanized steel wood screws with sharp threads and uniform finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJrkliRj0cBEP2tOkSRTm8bsJ0nu0dGsyMpXZv1KB5zyaGubMICSsKLOjJSGQXGOwOO5Q33o-v55Hrfj1vFvCqbtKBnAclElf3pdrOFzf-gu59GevuHfztdsfFhNea02yMC_fKpMuM5bgTTPjvgtdBB5J2qzGwWqhGxfnLoSeMRXhZ8WUn0D6FypRVMz8jJgMr3GPoAO2GafuNxeZTiYa1lEfOAIu9fmLaR5ON6xf5OTMb6GqNVRryO1pbRn7ldyTZIsABIOl7hMCR"/>
+<span class="absolute top-3 right-3 bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Bulk Only</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">Galvanized Wood Screws (5kg)</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Weather Resistant Coating</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹1,250</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close-up of a heavy duty polished chrome ball bearing door hinge reflecting clean studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLOaf06yAgd_-tvZ44sw7Hax1Hv1FnXDfuLvrDrNsreE1HKJge-hhW7FslUH4W2PzkVm0s9XwV9ov1R9vIdxWxT4prxuHj5ldeco1g3GQL2Bf__pYyc5dvUQQ9rNw7J85A5U9rogJQQNIq5UzxWMokLipuDdSwSXdMD8-74ZtXw3wbPc05-jeaWsLBKnPjmKKDr-SrsVR47nTZRJ_pFqZrwpkjBbnK5VWAL0igbzum7tLuNHMz9_obwUDCYTtLbwxrVmjhe8laf7Vp"/>
+<span class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">In Stock</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">Heavy Duty Ball Bearing Hinge</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Set of 3, Polished Chrome</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹850</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="professional cordless impact drill with battery pack and various bits laid out on a blueprint background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAKcPl-8pHfbXGbmnNFAowI43MaHXYX3FQDD2SKbzSrzA2dG2WX6AIuwKqcU5zP_R8PuDY5Bynh6McYcKnV7XGXHj668y6BEFRISQA4Jjlvs1JgWSjCU1pA-ZAH-T8PiqmOwVUOgYts30RRostm6OzZv3v_OObms4Q9er9T4Rf6HHRKEDOoGvcSPfywb0Jyd6nmKD85JmipZwdSkjHhb4dfRea7lnXl325hoXAviiMZ48Uv8aoXSt5YhtK3kAoisspvgR2Gx3ojnPb"/>
+<span class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">In Stock</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">20V Cordless Impact Drill Kit</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Includes 2 Batteries &amp; Case</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹12,400</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-white rounded-xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="elegant minimalist kitchen cabinet pull handle in matte black against a light oak wood texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXs3vXsAOVSPQxDTbxCEIYcPocYsZ_epts5pQdNVvaCk28_GNmMuZd50__PdjnsyrIAGqiCwwthy8d_a5nGG8fyYpayYfPfS7j_emmM4rT-jJ2QQ64GyNVVsR4JYcdIJIkUl59lPmVf4_L5fQVXGxMZQggcOmVXJsoo-LTgjZeRj8Cy3rM0yxStJf5-yrChkBLpo9WXMX39p9knzLxDljWXJbWnQ_pINmzwzrQPI47q11ndxAQkSRQB3hZrzuKyA1g8CaqMRZvz57v"/>
+<span class="absolute top-3 right-3 bg-error text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Low Stock</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-h3 text-lg text-slate-900 mb-2">Modern Minimalist Cabinet Pull</h3>
+<div class="mt-auto">
+<p class="text-slate-500 text-small mb-4">Pack of 10, Matte Black</p>
+<div class="flex items-center justify-between">
+<span class="text-xl font-bold text-slate-900">₹3,200</span>
+<button class="bg-primary-container text-white p-2 rounded-lg hover:bg-indigo-700 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-6 max-w-7xl mx-auto gap-4">
+<span class="font-bold text-slate-900">Materials Market</span>
+<div class="flex gap-6">
+<a class="font-inter text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline" href="#">Terms of Service</a>
+<a class="font-inter text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline" href="#">Privacy Policy</a>
+<a class="font-inter text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline" href="#">Vendor Guidelines</a>
+<a class="font-inter text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline" href="#">Help Center</a>
+</div>
+<p class="font-inter text-xs text-slate-500 text-center md:text-right">© 2024 Materials Market. Industrial Precision for Professionals.</p>
+</div>
+</footer>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="fixed bottom-0 w-full z-50 bg-white/90 backdrop-blur-md border-t border-slate-100 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] h-16 md:hidden">
+<div class="flex justify-around items-center h-full w-full px-2 pb-safe">
+<button class="flex flex-col items-center justify-center text-slate-400 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-indigo-600 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">search</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>

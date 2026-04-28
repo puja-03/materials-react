@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Tracking &amp; Invoice | Materials Market</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#586377",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container": "#eceef0",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#545f73",
+                        "on-background": "#191c1e",
+                        "tertiary": "#005338",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#4f46e5",
+                        "surface": "#f7f9fb",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed": "#0f0069",
+                        "on-surface-variant": "#464555",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#777587",
+                        "on-tertiary-fixed": "#002113",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#006e4b",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary-fixed": "#e2dfff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d5e0f8",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-container": "#67f4b7",
+                        "surface-variant": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "primary": "#3525cd",
+                        "tertiary-fixed-dim": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "unit": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "small": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h2": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "small": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased">
+<!-- Top Navigation Shell -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Materials Market</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-inter text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200" href="#">Bulk Orders</a>
+<a class="font-inter text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200" href="#">Materials</a>
+<a class="font-inter text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200" href="#">Rentals</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-inter text-sm font-medium text-slate-600 dark:text-slate-400">Login</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-inter text-sm font-medium hover:brightness-110 transition-all">Shop Sign Up</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- Back Button -->
+<div class="mb-8">
+<button class="flex items-center gap-2 text-primary font-label-md hover:gap-3 transition-all">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                Back to orders
+            </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Tracking & Items -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Order Status Timeline Card -->
+<section class="bg-white border border-slate-100 rounded-xl shadow-md p-8">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h2 class="font-h3 text-h3 text-on-surface mb-1">Tracking Order</h2>
+<p class="text-on-surface-variant font-body-md">Shipment by <span class="font-bold text-on-surface">ABC Hardware</span></p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md">
+                            Estimated Delivery: Oct 24
+                        </div>
+</div>
+<div class="relative flex justify-between items-start w-full">
+<!-- Progress Bar Background -->
+<div class="absolute top-[22px] left-[5%] right-[5%] h-1 bg-surface-container rounded-full"></div>
+<!-- Active Progress Bar -->
+<div class="absolute top-[22px] left-[5%] w-[60%] h-1 bg-primary rounded-full"></div>
+<!-- Step 1 -->
+<div class="relative flex flex-col items-center text-center w-1/4">
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center z-10 shadow-lg mb-4">
+<span class="material-symbols-outlined" data-weight="fill">check_circle</span>
+</div>
+<span class="font-label-md text-on-surface">Order Placed</span>
+<span class="text-small text-on-surface-variant mt-1">Oct 20, 09:30 AM</span>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col items-center text-center w-1/4">
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center z-10 shadow-lg mb-4">
+<span class="material-symbols-outlined" data-weight="fill">store</span>
+</div>
+<span class="font-label-md text-on-surface">Shop Accepted</span>
+<span class="text-small text-on-surface-variant mt-1">Oct 20, 11:45 AM</span>
+</div>
+<!-- Step 3 (Active) -->
+<div class="relative flex flex-col items-center text-center w-1/4">
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center z-10 shadow-lg mb-4 ring-4 ring-primary-container ring-opacity-20">
+<span class="material-symbols-outlined" data-weight="fill">local_shipping</span>
+</div>
+<span class="font-label-md text-primary font-bold">Dispatched</span>
+<span class="text-small text-on-surface-variant mt-1">Oct 21, 02:15 PM</span>
+</div>
+<!-- Step 4 -->
+<div class="relative flex flex-col items-center text-center w-1/4">
+<div class="w-12 h-12 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center z-10 mb-4">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<span class="font-label-md text-on-surface-variant">Delivered</span>
+<span class="text-small text-on-surface-variant mt-1">Pending</span>
+</div>
+</div>
+</section>
+<!-- Order Items List -->
+<section class="bg-white border border-slate-100 rounded-xl shadow-md overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 bg-slate-50">
+<h3 class="font-h3 text-body-lg font-bold text-on-surface">Order Items (3)</h3>
+</div>
+<div class="divide-y divide-slate-100">
+<!-- Item 1 -->
+<div class="p-6 flex items-center gap-6 hover:bg-slate-50 transition-colors">
+<img class="w-20 h-20 rounded-lg object-cover border border-slate-200" data-alt="high quality industrial Portland cement bags stacked neatly on a wooden pallet in a bright warehouse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5sSmCmmb_oq9KS9fEf6qderhuSuRPEh-LBHbiPy_8o_nbc2xCihnpSCy0BVlDQvQSJ9ROn4DX_lBz3ZsOOTs8zdtIhnR-HPyZ_XuF1R6-4Zi-l6nqCSbvbXlBzFUUdoZuJHkpkFfJC_tcsWiuHz2Pn0Eld_8cO9CTOLwXoLYpWGAEIIBAsu2uan6c0bI7h9sRxKba4NSwV1OQBDgMKkhqCCjYhQRl7TofT5fj_09IJK_gnqTRNYnI1lR-f66Ej_U-vMbFlEuobX69"/>
+<div class="flex-grow">
+<h4 class="font-label-md text-on-surface text-lg">Premium Portland Cement 50kg</h4>
+<p class="text-small text-on-surface-variant">Industrial Grade • SKU: CEM-9920</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">£450.00</p>
+<p class="text-small text-on-surface-variant">Qty: 25</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-6 flex items-center gap-6 hover:bg-slate-50 transition-colors">
+<img class="w-20 h-20 rounded-lg object-cover border border-slate-200" data-alt="stack of polished construction rebar steel rods with circular cross sections and metallic texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCzhMqRaDpHWSaZpzDC42U4Bvh32PRvjunnUmrfrEBQKr-LhDB5w1U9cIWp7VasKB66Q-3sTQLBf86Y7ZXqYi0AroaOeNZ-CCXZ6nsRO-OyMDgQTqVNUSOqHaOp3L8GcTLQUvFlIbVDw782BlV1ghMIzMEF38MZ1cas-YR1qOzVgWEeEalynX3kto1OH2NNMQpgPWEm6N5LPk2c031mTP092TL97ww_Xm3UILNwOhlAEdlk2dcuogftniMJzMutQZSkUKvKuiyl9Cm"/>
+<div class="flex-grow">
+<h4 class="font-label-md text-on-surface text-lg">Reinforcement Steel Rods 12mm</h4>
+<p class="text-small text-on-surface-variant">High Tensile • SKU: REB-1122</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">£1,200.00</p>
+<p class="text-small text-on-surface-variant">Qty: 100</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-6 flex items-center gap-6 hover:bg-slate-50 transition-colors">
+<img class="w-20 h-20 rounded-lg object-cover border border-slate-200" data-alt="professional contractor grade red brick stack for architectural construction project with clean mortar lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzmBZeRyBR5ywYRcJGodRJ4DeI2iTt91HdqPCg3fX8g7szmNa2uX604j0PQea57QTg_V-XGkcvqtIjgEqPU8-An_WhvziVyzT6keUDYqcKGUGA2HrIVE4OpQBVQHfx-uLJa1SIebJvOy2CHjSoZiLpBmQcFFt7cg2Z80Cp1HUt7yfkLdjNmJJhNXrTS1T15dafcIwsbUowHlwkkVQhplktvi-ytzgRiPvqK6Oy94HI3e2b8gLwhI5-U8sNAhHTyOIz_VTymNVcBGNL"/>
+<div class="flex-grow">
+<h4 class="font-label-md text-on-surface text-lg">Engineering Bricks Class B</h4>
+<p class="text-small text-on-surface-variant">Red Multi • SKU: BRK-5541</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">£890.00</p>
+<p class="text-small text-on-surface-variant">Qty: 500</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Invoice & Summary -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Invoice Card -->
+<aside class="bg-indigo-900 text-white rounded-xl shadow-xl overflow-hidden relative">
+<!-- Subtle texture overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="p-8 relative z-10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-70">Tax Invoice</span>
+<h3 class="font-h3 text-h2 leading-none mt-1">INV-2024-8842</h3>
+</div>
+<button class="bg-white/20 hover:bg-white/30 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="space-y-4 border-t border-white/10 pt-6">
+<div class="flex justify-between">
+<span class="text-indigo-200 font-label-md">Order ID</span>
+<span class="font-mono">#MM-772910</span>
+</div>
+<div class="flex justify-between">
+<span class="text-indigo-200 font-label-md">Date Issued</span>
+<span class="">Oct 20, 2024</span>
+</div>
+<div class="flex justify-between">
+<span class="text-indigo-200 font-label-md">Vendor</span>
+<span class="font-bold">ABC Hardware</span>
+</div>
+</div>
+<div class="mt-12 bg-white/10 rounded-lg p-4">
+<div class="flex justify-between items-end">
+<div>
+<span class="text-[10px] uppercase tracking-[0.1em] opacity-70 block mb-1">Total Amount Paid</span>
+<span class="text-3xl font-bold font-h2">£2,540.00</span>
+</div>
+<span class="material-symbols-outlined text-emerald-400">verified_user</span>
+</div>
+</div>
+</div>
+<!-- Decorative bottom cutout -->
+<div class="h-4 w-full bg-slate-50 flex justify-between px-2">
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-indigo-900 -mt-2"></div>
+</div>
+</aside>
+<!-- Help Center Card -->
+<div class="bg-white border border-slate-100 rounded-xl p-6 shadow-md">
+<h4 class="font-h3 text-body-lg text-on-surface mb-4">Need Assistance?</h4>
+<div class="space-y-4">
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 hover:bg-slate-50 transition-all text-on-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+<span class="font-label-md">Chat with ABC Hardware</span>
+</div>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 hover:bg-slate-50 transition-all text-on-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">report_problem</span>
+<span class="font-label-md">Report Issue</span>
+</div>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center py-8 px-6 max-w-7xl mx-auto gap-4">
+<div class="font-bold text-slate-900 dark:text-white">Materials Market</div>
+<div class="flex gap-6">
+<a class="font-inter text-xs text-slate-500 dark:text-slate-400 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" href="#">Terms of Service</a>
+<a class="font-inter text-xs text-slate-500 dark:text-slate-400 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" href="#">Privacy Policy</a>
+<a class="font-inter text-xs text-slate-500 dark:text-slate-400 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" href="#">Vendor Guidelines</a>
+<a class="font-inter text-xs text-slate-500 dark:text-slate-400 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" href="#">Help Center</a>
+</div>
+<div class="font-inter text-xs text-slate-500 dark:text-slate-400">© 2024 Materials Market. Industrial Precision for Professionals.</div>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 border-t bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-slate-100 dark:border-slate-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex justify-around items-center h-16 w-full px-2 pb-safe">
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">search</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-indigo-600 dark:text-indigo-400 scale-95 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" data-weight="fill">inventory_2</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>

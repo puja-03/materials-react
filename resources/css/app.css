@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+
+    /* Stitch custom colors */
+    --color-primary-container: var(--primary-container);
+    --color-on-primary-container: var(--on-primary-container);
+    --color-secondary-container: var(--secondary-container);
+    --color-on-secondary-container: var(--on-secondary-container);
+    --color-tertiary: var(--tertiary);
+    --color-on-tertiary: var(--on-tertiary);
+    --color-tertiary-container: var(--tertiary-container);
+    --color-on-tertiary-container: var(--on-tertiary-container);
+}
+
+:root {
+    --background: #f7f9fb;
+    --foreground: #191c1e;
+    --card: #ffffff;
+    --card-foreground: #191c1e;
+    --popover: #ffffff;
+    --popover-foreground: #191c1e;
+    --primary: #3525cd;
+    --primary-foreground: #ffffff;
+    --primary-container: #4f46e5;
+    --on-primary-container: #dad7ff;
+    --secondary: #545f73;
+    --secondary-foreground: #ffffff;
+    --secondary-container: #d5e0f8;
+    --on-secondary-container: #586377;
+    --tertiary: #005338;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #006e4b;
+    --on-tertiary-container: #67f4b7;
+    --muted: #eceef0;
+    --muted-foreground: #464555;
+    --accent: #005338;
+    --accent-foreground: #ffffff;
+    --destructive: #ba1a1a;
+    --destructive-foreground: #ffffff;
+    --border: #777587;
+    --input: #777587;
+    --ring: #4f46e5;
+    --chart-1: #3525cd;
+    --chart-2: #545f73;
+    --chart-3: #005338;
+    --chart-4: #4f46e5;
+    --chart-5: #6ffbbe;
+    --radius: 0.5rem;
+    --sidebar: #f7f9fb;
+    --sidebar-foreground: #191c1e;
+    --sidebar-primary: #3525cd;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #d5e0f8;
+    --sidebar-accent-foreground: #586377;
+    --sidebar-border: #777587;
+    --sidebar-ring: #4f46e5;
+}
+
+.dark {
+    --background: #191c1e;
+    --foreground: #f7f9fb;
+    --card: #191c1e;
+    --card-foreground: #f7f9fb;
+    --popover: #191c1e;
+    --popover-foreground: #f7f9fb;
+    --primary: #c3c0ff;
+    --primary-foreground: #0f0069;
+    --primary-container: #3323cc;
+    --on-primary-container: #dad7ff;
+    --secondary: #bcc7de;
+    --secondary-foreground: #111c2d;
+    --secondary-container: #3c475a;
+    --on-secondary-container: #d8e3fb;
+    --tertiary: #4edea3;
+    --on-tertiary: #002113;
+    --tertiary-container: #005236;
+    --on-tertiary-container: #6ffbbe;
+    --muted: #464555;
+    --muted-foreground: #c7c4d8;
+    --accent: #4edea3;
+    --accent-foreground: #002113;
+    --destructive: #ffdad6;
+    --destructive-foreground: #93000a;
+    --border: #464555;
+    --input: #464555;
+    --ring: #c3c0ff;
+    --chart-1: #c3c0ff;
+    --chart-2: #bcc7de;
+    --chart-3: #4edea3;
+    --chart-4: #3323cc;
+    --chart-5: #005236;
+    --sidebar: #191c1e;
+    --sidebar-foreground: #f7f9fb;
+    --sidebar-primary: #c3c0ff;
+    --sidebar-primary-foreground: #0f0069;
+    --sidebar-accent: #3c475a;
+    --sidebar-accent-foreground: #d8e3fb;
+    --sidebar-border: #464555;
+    --sidebar-ring: #c3c0ff;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
