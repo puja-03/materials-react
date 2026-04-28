@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
 
