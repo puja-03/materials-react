@@ -1,43 +1,6 @@
 import { Head } from '@inertiajs/react';
 
-export default function UserManagement() {
-    const users = [
-        {
-            id: 1,
-            name: 'Julian Martinez',
-            email: 'julian@buildershub.com',
-            role: 'Shopkeeper',
-            status: 'Verified',
-            statusColor: 'text-emerald-600',
-            icon: 'check_circle',
-            joined: 'Oct 12, 2023',
-            initials: 'JM'
-        },
-        {
-            id: 2,
-            name: 'Sarah Chen',
-            email: 'sarah.chen@studioarc.io',
-            role: 'Architect',
-            status: 'Pending',
-            statusColor: 'text-amber-600',
-            icon: 'hourglass_empty',
-            joined: 'Jan 05, 2024',
-            initials: 'SC',
-            verifyAction: true
-        },
-        {
-            id: 3,
-            name: 'Robert Kagawa',
-            email: 'robert@kagawa-const.com',
-            role: 'Client',
-            status: 'Verified',
-            statusColor: 'text-emerald-600',
-            icon: 'check_circle',
-            joined: 'Feb 14, 2024',
-            initials: 'RK'
-        }
-    ];
-
+export default function UserManagement({ users, total_users }: any) {
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
             <Head title="User Management - Admin Console" />
@@ -73,7 +36,7 @@ export default function UserManagement() {
                         <span className="text-emerald-600 text-xs font-bold">+12%</span>
                     </div>
                     <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Total Users</p>
-                    <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">12,482</h3>
+                    <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">{total_users.toLocaleString()}</h3>
                 </div>
 
                 <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
@@ -106,7 +69,7 @@ export default function UserManagement() {
                         <span className="text-emerald-600 text-xs font-bold">+18.2%</span>
                     </div>
                     <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Monthly Revenue</p>
-                    <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">$142.5k</h3>
+                    <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">₹1.42L</h3>
                 </div>
             </section>
 
@@ -138,47 +101,39 @@ export default function UserManagement() {
                         <thead>
                             <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase tracking-wider">
                                 <th className="px-6 py-4 font-bold">User</th>
-                                <th className="px-6 py-4 font-bold">Role</th>
+                                <th className="px-6 py-4 font-bold">Email</th>
                                 <th className="px-6 py-4 font-bold">KYC Status</th>
                                 <th className="px-6 py-4 font-bold">Joined</th>
                                 <th className="px-6 py-4 text-right font-bold">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                            {users.map((user) => (
+                            {users.map((user: any) => (
                                 <tr key={user.email} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
-                                                {user.initials}
+                                                {user.name.charAt(0)}
                                             </div>
                                             <div>
                                                 <p className="text-sm font-bold text-slate-900 dark:text-white">{user.name}</p>
-                                                <p className="text-xs text-slate-500">{user.email}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider">
-                                            {user.role}
-                                        </span>
+                                        <p className="text-xs text-slate-500">{user.email}</p>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className={`flex items-center gap-1.5 ${user.statusColor} font-bold text-sm`}>
+                                        <span className={`flex items-center gap-1.5 text-emerald-600 font-bold text-sm`}>
                                             <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                                {user.icon}
+                                                check_circle
                                             </span>
-                                            {user.status}
+                                            Verified
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{user.joined}</td>
+                                    <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{new Date(user.created_at).toLocaleDateString()}</td>
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex justify-end gap-2">
-                                            {user.verifyAction && (
-                                                <button className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1 rounded-lg text-xs font-bold transition-all">
-                                                    Verify Now
-                                                </button>
-                                            )}
                                             <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-all">
                                                 <span className="material-symbols-outlined text-lg">visibility</span>
                                             </button>
@@ -195,7 +150,7 @@ export default function UserManagement() {
 
                 <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/30">
                     <p className="text-xs text-slate-500 font-medium">
-                        Showing <span className="font-bold text-slate-900 dark:text-white">1-3</span> of <span className="font-bold text-slate-900 dark:text-white">12,482</span> users
+                        Showing <span className="font-bold text-slate-900 dark:text-white">1-{users.length}</span> of <span className="font-bold text-slate-900 dark:text-white">{total_users}</span> users
                     </p>
                     <div className="flex gap-2">
                         <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-400 disabled:opacity-50" disabled>
@@ -210,6 +165,12 @@ export default function UserManagement() {
         </div>
     );
 }
+
+UserManagement.layout = (page: any) => (
+    <div className="min-h-screen bg-surface">
+        {page}
+    </div>
+);
 
 UserManagement.layout = (page: any) => (
     <div className="min-h-screen bg-surface">
