@@ -40,10 +40,12 @@ export default function Cart() {
     const gst = subtotal * 0.18;
     const total = subtotal + gst;
 
+    useEffect(() => {
+        setData('items', cartItems.map(item => ({ product_id: item.product_id, quantity: item.quantity })) as any);
+    }, [cartItems]);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const items = cartItems.map(item => ({ product_id: item.product_id, quantity: item.quantity }));
-        setData('items', items as any);
         post(route('checkout.store'));
     };
 
