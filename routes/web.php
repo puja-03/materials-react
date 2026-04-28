@@ -20,6 +20,9 @@ Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.st
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
     Route::get('admin/users', [UserController::class, 'index'])->name('admin.users');
     Route::get('orders/{id}/track', [OrderController::class, 'show'])->name('orders.track');
 });
