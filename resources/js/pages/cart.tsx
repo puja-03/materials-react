@@ -2,7 +2,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
 import { index as productsIndex } from '@/routes/products/index';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Cart() {
     // Mock cart items for demo purposes
