@@ -38,6 +38,7 @@ class ProductController extends Controller
 
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']) . '-' . rand(1000, 9999);
         $validated['vendor_name'] = auth()->user()->name;
+        $validated['user_id'] = auth()->id();
         $validated['unit'] = 'pcs';
 
         Product::create($validated);
@@ -55,23 +56,44 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $validated = $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'image_url' => 'nullable|url',
-        ]);
+        ];
+
+        // Only allow price update if user is admin
+        if (auth()->user()->role === 'admin') {
+            $rules['price'] = 'required|numeric|min:0';
+        }
+
+        $validated = $request->validate($rules);
 
         $product->update($validated);
 
         return redirect()->route('dashboard')->with('success', 'Product updated successfully!');
     }
 
+    public function updatePrice(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $product->update(['price' => $validated['price']]);
+
+        return back()->with('success', 'Product price updated globally.');
+    }
+
     public function destroy(Product $product)
     {
-        // Check if product has been ordered
+        // Check if user owns product or is admin
+        if ($product->user_id !== auth()->id() && auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
         if ($product->orderItems()->exists()) {
             return back()->with('error', 'Cannot remove product that has existing orders. Consider updating stock to 0 instead.');
         }

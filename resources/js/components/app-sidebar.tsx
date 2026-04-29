@@ -30,6 +30,11 @@ const mainNavItems: NavItem[] = [
         icon: 'group',
     },
     {
+        title: 'Wallet',
+        href: route('wallet.index'),
+        icon: 'account_balance_wallet',
+    },
+    {
         title: 'Orders',
         href: '#',
         icon: 'receipt_long',
