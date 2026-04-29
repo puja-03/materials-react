@@ -2,6 +2,8 @@ import React from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
+import { index as productsIndex, create, edit, destroy } from '@/routes/products/index';
+import { price as adminProductsPrice } from '@/routes/admin/products/index';
 
 export default function ProductListing({ products, categories }: { products: any[]; categories: any[] }) {
     const { auth } = usePage().props as any;
@@ -22,12 +24,12 @@ export default function ProductListing({ products, categories }: { products: any
 
     const handleDelete = (id: number) => {
         if (confirm('Remove this product from the marketplace?')) {
-            router.delete(route('products.destroy', id));
+            router.delete(destroy({ product: id }).url());
         }
     };
 
     const handlePriceUpdate = (productId: number) => {
-        router.patch(route('admin.products.price', productId), { price: newPrice }, {
+        router.patch(adminProductsPrice({ product: productId }).url(), { price: newPrice }, {
             onSuccess: () => { setEditingPrice(null); setNewPrice(''); },
         });
     };
@@ -75,7 +77,7 @@ export default function ProductListing({ products, categories }: { products: any
                     </div>
                     {(isAdmin || isSeller) && (
                         <Link
-                            href={route('products.create')}
+                            href={create.url()}
                             className="flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20"
                         >
                             <span className="material-symbols-outlined text-[18px]">add</span>
@@ -226,7 +228,7 @@ export default function ProductListing({ products, categories }: { products: any
                                         <td className="px-6 py-4">
                                             <div className="flex items-center justify-end gap-1">
                                                 <Link
-                                                    href={route('products.edit', product.id)}
+                                                    href={edit({ product: product.id }).url()}
                                                     className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
                                                     title="Edit"
                                                 >
@@ -265,7 +267,7 @@ export default function ProductListing({ products, categories }: { products: any
 
 ProductListing.layout = (page: React.ReactNode) => {
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Products', href: route('products.index') },
+        { title: 'Products', href: productsIndex.url() },
     ];
     return <AppLayout breadcrumbs={breadcrumbs}>{page}</AppLayout>;
 };

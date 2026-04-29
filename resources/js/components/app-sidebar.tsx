@@ -1,7 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -17,7 +15,11 @@ import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 import { users } from '@/routes/admin';
-import { route } from '@/route-global';
+import { index as walletIndex } from '@/routes/wallet/index';
+import { index as productsIndex } from '@/routes/products/index';
+import { index as ordersIndex } from '@/routes/orders/index';
+import { edit as profileEdit } from '@/routes/profile/index';
+import { home } from '@/routes';
 
 const mainNavItems: NavItem[] = [
     {
@@ -32,7 +34,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Wallet',
-        href: route('wallet.index'),
+        href: walletIndex.url(),
         icon: 'account_balance_wallet',
     },
     {
@@ -56,33 +58,38 @@ import { usePage } from '@inertiajs/react';
 
 export function AppSidebar() {
     const { auth } = usePage().props as any;
-    const userRole = auth.user.role;
+    const userRole = auth.user?.role;
 
     const adminNavItems: NavItem[] = [
         { title: 'Admin Dashboard', href: dashboard(), icon: 'dashboard' },
         { title: 'User Management', href: users.url(), icon: 'group' },
-        { title: 'Global Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
-        { title: 'All Orders', href: route('orders.index'), icon: 'receipt_long' },
+        { title: 'Global Wallet', href: walletIndex.url(), icon: 'account_balance_wallet' },
+        { title: 'All Orders', href: ordersIndex.url(), icon: 'receipt_long' },
         { title: 'Categories', href: '#', icon: 'category' },
         { title: 'System Reports', href: '#', icon: 'analytics' },
     ];
 
     const sellerNavItems: NavItem[] = [
         { title: 'Seller Dashboard', href: dashboard(), icon: 'dashboard' },
-        { title: 'My Products', href: route('products.index'), icon: 'inventory_2' },
-        { title: 'My Orders', href: route('orders.index'), icon: 'shopping_cart_checkout' },
-        { title: 'Seller Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
+        { title: 'My Products', href: productsIndex.url(), icon: 'inventory_2' },
+        { title: 'My Orders', href: ordersIndex.url(), icon: 'shopping_cart_checkout' },
+        { title: 'Seller Wallet', href: walletIndex.url(), icon: 'account_balance_wallet' },
         { title: 'Earnings Report', href: '#', icon: 'payments' },
     ];
 
     const userNavItems: NavItem[] = [
-        { title: 'Marketplace', href: route('home'), icon: 'storefront' },
-        { title: 'My Orders', href: route('orders.index'), icon: 'package_2' },
-        { title: 'My Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
-        { title: 'Settings', href: route('profile.edit'), icon: 'settings' },
+        { title: 'Marketplace', href: home.url(), icon: 'storefront' },
+        { title: 'My Orders', href: ordersIndex.url(), icon: 'package_2' },
+        { title: 'My Wallet', href: walletIndex.url(), icon: 'account_balance_wallet' },
+        { title: 'Settings', href: profileEdit.url(), icon: 'settings' },
+    ];
+
+    const guestNavItems: NavItem[] = [
+        { title: 'Marketplace', href: home.url(), icon: 'storefront' },
     ];
 
     const currentNavItems = 
+        !auth.user ? guestNavItems :
         userRole === 'admin' ? adminNavItems :
         userRole === 'shopkeeper' ? sellerNavItems :
         userNavItems;

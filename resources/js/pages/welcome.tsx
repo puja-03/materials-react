@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
 import { register } from '@/routes';
-import { route } from '@/route-global';
+import { index as productsIndex } from '@/routes/products/index';
 
 export default function Welcome({ featuredProducts }: { featuredProducts: any[] }) {
     return (
@@ -25,7 +25,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                                 <Link
-                                    href={route('products.index')}
+                                    href={productsIndex.url()}
                                     className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:shadow-lg transition-all active:scale-95"
                                 >
                                     <span className="material-symbols-outlined">shopping_basket</span>
@@ -86,7 +86,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                                 <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Featured Materials</h2>
                                 <p className="text-slate-500 mt-2">Latest arrivals from verified vendors</p>
                             </div>
-                            <Link href={route('products.index')} className="text-primary font-bold hover:underline">View All Materials →</Link>
+                            <Link href={productsIndex.url()} className="text-primary font-bold hover:underline">View All Materials →</Link>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             {featuredProducts.map((product) => (
@@ -102,7 +102,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                                         <p className="text-xs text-slate-500 mb-4 line-clamp-1">{product.description}</p>
                                         <div className="flex justify-between items-center">
                                             <span className="text-lg font-black text-slate-900 dark:text-white">₹{parseFloat(product.price).toLocaleString()}</span>
-                                            <Link href={route('products.index')} className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
+                                            <Link href={productsIndex.url()} className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
                                                 <span className="material-symbols-outlined text-[20px]">add_shopping_cart</span>
                                             </Link>
                                         </div>

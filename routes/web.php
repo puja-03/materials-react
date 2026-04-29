@@ -19,6 +19,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::redirect('product', 'products');
 Route::inertia('cart', 'cart')->name('cart');
 Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
