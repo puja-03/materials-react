@@ -17,6 +17,7 @@ import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 import { users } from '@/routes/admin';
+import { route } from '@/route-global';
 
 const mainNavItems: NavItem[] = [
     {
