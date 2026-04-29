@@ -170,6 +170,9 @@ export default function UserManagement({ users: paginatedUsers, stats, filters }
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
+                                        <p className="text-sm font-bold text-slate-900 dark:text-white">₹{user.wallet?.balance?.toLocaleString() || '0'}</p>
+                                    </td>
+                                    <td className="px-6 py-4">
                                         <div className="flex items-center gap-2">
                                             <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                                                 user.kyc_status === 'approved'

@@ -51,7 +51,41 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+import { usePage } from '@inertiajs/react';
+
 export function AppSidebar() {
+    const { auth } = usePage().props as any;
+    const userRole = auth.user.role;
+
+    const adminNavItems: NavItem[] = [
+        { title: 'Admin Dashboard', href: dashboard(), icon: 'dashboard' },
+        { title: 'User Management', href: users.url(), icon: 'group' },
+        { title: 'Global Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
+        { title: 'All Orders', href: route('orders.index'), icon: 'receipt_long' },
+        { title: 'Categories', href: '#', icon: 'category' },
+        { title: 'System Reports', href: '#', icon: 'analytics' },
+    ];
+
+    const sellerNavItems: NavItem[] = [
+        { title: 'Seller Dashboard', href: dashboard(), icon: 'dashboard' },
+        { title: 'My Products', href: route('products.index'), icon: 'inventory_2' },
+        { title: 'My Orders', href: route('orders.index'), icon: 'shopping_cart_checkout' },
+        { title: 'Seller Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
+        { title: 'Earnings Report', href: '#', icon: 'payments' },
+    ];
+
+    const userNavItems: NavItem[] = [
+        { title: 'Marketplace', href: route('home'), icon: 'storefront' },
+        { title: 'My Orders', href: route('orders.index'), icon: 'package_2' },
+        { title: 'My Wallet', href: route('wallet.index'), icon: 'account_balance_wallet' },
+        { title: 'Settings', href: route('profile.edit'), icon: 'settings' },
+    ];
+
+    const currentNavItems = 
+        userRole === 'admin' ? adminNavItems :
+        userRole === 'shopkeeper' ? sellerNavItems :
+        userNavItems;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -67,7 +101,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={currentNavItems} />
             </SidebarContent>
 
             <SidebarFooter>
