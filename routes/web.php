@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
-Route::inertia('/', 'welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+Route::get('/', function () {
+    return Inertia::render('welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+        'featuredProducts' => \App\Models\Product::with('category')->latest()->take(4)->get(),
+    ]);
+})->name('home');
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
