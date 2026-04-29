@@ -136,6 +136,7 @@ export default function UserManagement({ users: paginatedUsers, stats, filters }
                                 <th className="px-6 py-4 font-bold">User</th>
                                 <th className="px-6 py-4 font-bold">Email</th>
                                 <th className="px-6 py-4 font-bold">Role</th>
+                                <th className="px-6 py-4 font-bold">Wallet</th>
                                 <th className="px-6 py-4 font-bold">KYC Status</th>
                                 <th className="px-6 py-4 font-bold">Joined</th>
                                 <th className="px-6 py-4 text-right font-bold">Actions</th>
