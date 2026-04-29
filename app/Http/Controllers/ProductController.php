@@ -12,8 +12,15 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+
+        $products = Product::with('category')
+            ->when($user && $user->role === 'shopkeeper', fn ($q) => $q->where('user_id', $user->id))
+            ->latest()
+            ->get();
+
         return Inertia::render('products/index', [
-            'products' => Product::with('category')->latest()->get(),
+            'products'   => $products,
             'categories' => Category::all(),
         ]);
     }
