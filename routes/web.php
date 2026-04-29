@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WalletController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
@@ -9,14 +17,6 @@ Route::get('/', function () {
         'featuredProducts' => Product::with('category')->latest()->take(4)->get(),
     ]);
 })->name('home');
-
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\WalletController;
-use App\Models\Product;
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::inertia('cart', 'cart')->name('cart');
