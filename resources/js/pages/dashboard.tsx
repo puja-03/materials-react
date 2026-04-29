@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { dashboard } from '@/routes';
 
 export default function Dashboard({ total_orders, total_products, total_users, recent_orders, products }: any) {
@@ -232,15 +232,6 @@ export default function Dashboard({ total_orders, total_products, total_users, r
         </div>
     );
 }
-
-Dashboard.layout = {
-    breadcrumbs: [
-        {
-            title: 'Dashboard',
-            href: dashboard(),
-        },
-    ],
-};
 
 Dashboard.layout = {
     breadcrumbs: [
