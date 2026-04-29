@@ -32,7 +32,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     const { isCurrentOrParentUrl } = useCurrentUrl();
 
     return (
-        <div className="px-4 py-6">
+        <div className="p-6">
             <Heading
                 title="Settings"
                 description="Manage your profile and account settings"
@@ -67,8 +67,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
                 <Separator className="my-6 lg:hidden" />
 
-                <div className="flex-1 md:max-w-2xl">
-                    <section className="max-w-xl space-y-12">
+                <div className="flex-1">
+                    <section className="w-full space-y-12">
                         {children}
                     </section>
                 </div>
