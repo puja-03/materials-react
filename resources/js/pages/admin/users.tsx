@@ -1,8 +1,16 @@
+import React from 'react';
 import { Head, router } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
 
-export default function UserManagement({ users, total_users }: any) {
+export default function UserManagement({ users, total_users, filters }: any) {
+    const [search, setSearch] = React.useState(filters.search || '');
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        router.get(route('admin.users'), { search }, { preserveState: true });
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-surface text-on-surface">
             <Head title="User Management - Admin Console" />
@@ -14,20 +22,22 @@ export default function UserManagement({ users, total_users }: any) {
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">User Management</h2>
                         <p className="text-sm text-slate-500">Monitor and verify platform participants</p>
                     </div>
-                    <div className="flex gap-4 w-full md:w-auto">
+                    <form onSubmit={handleSearch} className="flex gap-4 w-full md:w-auto">
                         <div className="relative flex-1 md:w-64">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
                             <input
                                 className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg focus:ring-2 focus:ring-primary outline-none text-slate-900 dark:text-white"
                                 placeholder="Search by name, email or ID..."
                                 type="text"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:brightness-110 transition-all">
-                            <span className="material-symbols-outlined text-[18px]">person_add</span>
-                            Invite User
+                        <button type="submit" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:brightness-110 transition-all">
+                            <span className="material-symbols-outlined text-[18px]">search</span>
+                            Search
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 {/* Stats Grid */}
@@ -140,12 +150,17 @@ export default function UserManagement({ users, total_users }: any) {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`flex items-center gap-1.5 text-emerald-600 font-bold text-sm`}>
-                                                <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                                    check_circle
+                                            <div className="flex items-center gap-2">
+                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                                                    user.kyc_status === 'approved'
+                                                        ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
+                                                        : user.kyc_status === 'rejected'
+                                                            ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'
+                                                            : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
+                                                }`}>
+                                                    {user.kyc_status}
                                                 </span>
-                                                Verified
-                                            </span>
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{new Date(user.created_at).toLocaleDateString()}</td>
                                         <td className="px-6 py-4 text-right">
@@ -164,6 +179,22 @@ export default function UserManagement({ users, total_users }: any) {
                                                             {r.replace('keeper', '')}
                                                         </button>
                                                     ))}
+                                                </div>
+                                                <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1 mr-2">
+                                                    <button
+                                                        onClick={() => router.patch(route('admin.users.kyc', user.id), { status: 'approved' })}
+                                                        className={`p-1 rounded transition-all hover:bg-emerald-500 hover:text-white ${user.kyc_status === 'approved' ? 'text-emerald-600' : 'text-slate-400'}`}
+                                                        title="Approve KYC"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">check</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => router.patch(route('admin.users.kyc', user.id), { status: 'rejected' })}
+                                                        className={`p-1 rounded transition-all hover:bg-rose-500 hover:text-white ${user.kyc_status === 'rejected' ? 'text-rose-600' : 'text-slate-400'}`}
+                                                        title="Reject KYC"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">close</span>
+                                                    </button>
                                                 </div>
                                                 <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-all">
                                                     <span className="material-symbols-outlined text-lg">visibility</span>
