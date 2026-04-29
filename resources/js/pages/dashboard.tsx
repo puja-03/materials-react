@@ -1,7 +1,17 @@
+import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { dashboard } from '@/routes';
 
-export default function Dashboard({ total_orders, total_products, total_users, recent_orders, products }: any) {
+export default function Dashboard({ total_orders, total_products, total_users, recent_orders, products, filters }: any) {
+    const [search, setSearch] = React.useState(filters?.search || '');
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        import('@inertiajs/react').then(({ router }) => {
+            router.get(route('dashboard'), { search }, { preserveState: true });
+        });
+    };
+
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
             <Head title="Shopkeeper Dashboard - Materials Market" />
@@ -133,14 +143,16 @@ export default function Dashboard({ total_orders, total_products, total_users, r
                 <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
                     <h4 className="text-lg font-bold text-slate-900 dark:text-white">Inventory Management</h4>
                     <div className="flex items-center gap-3 w-full md:w-auto">
-                        <div className="relative flex-1 md:w-64">
+                        <form onSubmit={handleSearch} className="relative flex-1 md:w-64">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
                             <input
                                 className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none text-slate-900 dark:text-white"
                                 placeholder="Search inventory..."
                                 type="text"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
-                        </div>
+                        </form>
                         <Link
                             href={route('products.create')}
                             className="bg-primary text-white px-4 py-2 rounded-lg font-bold text-sm hover:brightness-110 flex items-center gap-2"

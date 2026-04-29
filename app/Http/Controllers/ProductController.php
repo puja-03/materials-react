@@ -71,6 +71,11 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        // Check if product has been ordered
+        if ($product->orderItems()->exists()) {
+            return back()->with('error', 'Cannot remove product that has existing orders. Consider updating stock to 0 instead.');
+        }
+
         $product->delete();
 
         return redirect()->route('dashboard')->with('success', 'Product removed from marketplace.');
