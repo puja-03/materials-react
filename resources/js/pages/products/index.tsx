@@ -7,8 +7,9 @@ import { price as adminProductsPrice } from '@/routes/admin/products/index';
 
 export default function ProductListing({ products, categories }: { products: any[]; categories: any[] }) {
     const { auth } = usePage().props as any;
-    const isAdmin = auth.user.role === 'admin';
-    const isSeller = auth.user.role === 'shopkeeper';
+    const userRole = auth.user?.role;
+    const isAdmin = userRole === 'admin';
+    const isSeller = userRole === 'shopkeeper';
     const isUser = !isAdmin && !isSeller;
 
     const [search, setSearch] = React.useState('');

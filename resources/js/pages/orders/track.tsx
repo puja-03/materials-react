@@ -2,6 +2,8 @@ import React from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
+import { index as ordersIndex } from '@/routes/orders/index';
+import { status as adminOrdersStatus, refund as adminOrdersRefund } from '@/routes/admin/orders/index';
 
 export default function OrderTrack({ order }: { order: any }) {
     const { auth } = usePage().props as any;
@@ -34,7 +36,7 @@ export default function OrderTrack({ order }: { order: any }) {
 
             {/* Header */}
             <div className="flex items-center gap-4">
-                <Link href={route('orders.index')} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                <Link href={ordersIndex.url()} className="p-2 hover:bg-slate-100 dark:bg-slate-800 rounded-xl transition-all text-slate-400 hover:text-slate-900 dark:hover:text-white">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
                 <div>
@@ -55,7 +57,7 @@ export default function OrderTrack({ order }: { order: any }) {
                     {/* Admin Actions */}
                     {isAdmin && order.status === 'pending' && (
                         <button
-                            onClick={() => router.patch(route('admin.orders.status', order.id), { status: 'paid' })}
+                            onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
                             className="flex items-center gap-2 bg-emerald-600 text-white font-bold px-4 py-2 rounded-xl text-sm hover:bg-emerald-700 transition-all"
                         >
                             <span className="material-symbols-outlined text-[18px]">check_circle</span>
@@ -64,7 +66,7 @@ export default function OrderTrack({ order }: { order: any }) {
                     )}
                     {isAdmin && order.status === 'paid' && (
                         <button
-                            onClick={() => { if (confirm('Issue full refund to customer wallet?')) router.patch(route('admin.orders.refund', order.id)); }}
+                            onClick={() => { if (confirm('Issue full refund to customer wallet?')) router.patch(adminOrdersRefund({ order: order.id }).url()); }}
                             className="flex items-center gap-2 bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-sm hover:bg-blue-700 transition-all"
                         >
                             <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
@@ -224,7 +226,7 @@ export default function OrderTrack({ order }: { order: any }) {
 
 OrderTrack.layout = (page: React.ReactNode) => {
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Orders', href: route('orders.index') },
+        { title: 'Orders', href: ordersIndex.url() },
         { title: 'Track Order', href: '#' },
     ];
     return <AppLayout breadcrumbs={breadcrumbs}>{page}</AppLayout>;

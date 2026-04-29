@@ -2,6 +2,8 @@ import React from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
+import { index as ordersIndex, track as ordersTrack } from '@/routes/orders/index';
+import { status as adminOrdersStatus, refund as adminOrdersRefund } from '@/routes/admin/orders/index';
 
 export default function OrderIndex({ orders }: { orders: any[] }) {
     const { auth } = usePage().props as any;
@@ -114,7 +116,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
                                     <td className="px-6 py-5">
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
-                                                href={route('orders.track', order.id)}
+                                                href={ordersTrack({ id: order.id }).url()}
                                                 className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
                                                 title="Track Order"
                                             >
@@ -123,7 +125,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
                                             {/* Admin: approve / refund */}
                                             {isAdmin && order.status === 'pending' && (
                                                 <button
-                                                    onClick={() => router.patch(route('admin.orders.status', order.id), { status: 'paid' })}
+                                                    onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
                                                     className="p-2 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-lg text-slate-400 hover:text-emerald-600 transition-all"
                                                     title="Mark as Paid"
                                                 >
@@ -134,7 +136,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
                                                 <button
                                                     onClick={() => {
                                                         if (confirm('Refund this order to customer wallet?')) {
-                                                            router.patch(route('admin.orders.refund', order.id));
+                                                            router.patch(adminOrdersRefund({ order: order.id }).url());
                                                         }
                                                     }}
                                                     className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
@@ -166,7 +168,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
 
 OrderIndex.layout = (page: React.ReactNode) => {
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Orders', href: route('orders.index') },
+        { title: 'Orders', href: ordersIndex.url() },
     ];
     return <AppLayout breadcrumbs={breadcrumbs}>{page}</AppLayout>;
 };
