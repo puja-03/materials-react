@@ -3,6 +3,10 @@ import { Head, Link, router, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 import { dashboard } from '@/routes';
+import orders from '@/routes/orders';
+import products from '@/routes/products';
+import wallet from '@/routes/wallet';
+import admin from '@/routes/admin';
 
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ stats, recent_orders }: any) {
@@ -43,10 +47,10 @@ function AdminPanel({ stats, recent_orders }: any) {
             {/* Quick Links */}
             <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                    { label: 'Manage Users', icon: 'manage_accounts', href: route('admin.users'), color: 'border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-900/10 text-purple-700 dark:text-purple-300' },
-                    { label: 'View All Orders', icon: 'receipt_long', href: route('orders.index'), color: 'border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/10 text-blue-700 dark:text-blue-300' },
-                    { label: 'Admin Wallet', icon: 'account_balance_wallet', href: route('wallet.index'), color: 'border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-300' },
-                    { label: 'All Products', icon: 'inventory', href: route('products.index'), color: 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-300' },
+                    { label: 'Manage Users', icon: 'manage_accounts', href: admin.users.url(), color: 'border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-900/10 text-purple-700 dark:text-purple-300' },
+                    { label: 'View All Orders', icon: 'receipt_long', href: orders.index.url(), color: 'border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/10 text-blue-700 dark:text-blue-300' },
+                    { label: 'Admin Wallet', icon: 'account_balance_wallet', href: wallet.index.url(), color: 'border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-300' },
+                    { label: 'All Products', icon: 'inventory', href: products.index.url(), color: 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-300' },
                 ].map((q) => (
                     <Link key={q.label} href={q.href} className={`flex items-center gap-3 p-4 rounded-xl border-2 ${q.color} hover:scale-[1.02] transition-all font-bold text-sm`}>
                         <span className="material-symbols-outlined text-xl">{q.icon}</span>
@@ -59,7 +63,7 @@ function AdminPanel({ stats, recent_orders }: any) {
             <section className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
                     <h4 className="text-lg font-bold text-slate-900 dark:text-white">Recent Platform Orders</h4>
-                    <Link href={route('orders.index')} className="text-xs font-bold text-primary hover:underline">View All</Link>
+                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -121,7 +125,7 @@ function SellerPanel({ stats, recent_orders }: any) {
                         <h2 className="text-5xl font-black mt-1 tracking-tight">₹{Number(stats.my_earnings || 0).toLocaleString()}</h2>
                         <p className="text-primary-foreground/60 text-xs mt-2">95% of all your sales go here automatically</p>
                     </div>
-                    <Link href={route('wallet.index')} className="flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 rounded-xl hover:bg-slate-50 transition-all shadow-lg">
+                    <Link href={wallet.index.url()} className="flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 rounded-xl hover:bg-slate-50 transition-all shadow-lg">
                         <span className="material-symbols-outlined text-[20px]">account_balance_wallet</span>
                         Manage Wallet
                     </Link>
@@ -152,11 +156,11 @@ function SellerPanel({ stats, recent_orders }: any) {
 
             {/* Quick Actions */}
             <div className="flex flex-wrap gap-4">
-                <Link href={route('products.create')} className="flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                <Link href={products.create.url()} className="flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20">
                     <span className="material-symbols-outlined text-[20px]">add_circle</span>
                     List New Product
                 </Link>
-                <Link href={route('orders.index')} className="flex items-center gap-2 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                <Link href={orders.index.url()} className="flex items-center gap-2 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                     <span className="material-symbols-outlined text-[20px]">receipt_long</span>
                     View My Orders
                 </Link>
@@ -166,7 +170,7 @@ function SellerPanel({ stats, recent_orders }: any) {
             <section className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
                     <h4 className="text-lg font-bold text-slate-900 dark:text-white">Orders for My Products</h4>
-                    <Link href={route('orders.index')} className="text-xs font-bold text-primary hover:underline">View All</Link>
+                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -227,7 +231,7 @@ function UserPanel({ stats, recent_orders }: any) {
                     <div className="relative z-10">
                         <p className="text-primary-foreground/70 text-xs font-bold uppercase tracking-wider">Wallet Balance</p>
                         <h2 className="text-4xl font-black mt-2 tracking-tight">₹{Number(stats.wallet_balance || 0).toLocaleString()}</h2>
-                        <Link href={route('wallet.index')} className="mt-5 inline-flex items-center gap-2 bg-white/20 border border-white/20 text-white font-bold px-4 py-2 rounded-lg hover:bg-white/30 transition-all text-sm">
+                        <Link href={wallet.index.url()} className="mt-5 inline-flex items-center gap-2 bg-white/20 border border-white/20 text-white font-bold px-4 py-2 rounded-lg hover:bg-white/30 transition-all text-sm">
                             <span className="material-symbols-outlined text-[18px]">add</span>
                             Add Money
                         </Link>
@@ -252,7 +256,7 @@ function UserPanel({ stats, recent_orders }: any) {
                         </div>
                     ))}
 
-                    <Link href={route('products.index')} className="sm:col-span-2 flex items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all">
+                    <Link href={products.index.url()} className="sm:col-span-2 flex items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all">
                         <div className="flex items-center gap-3">
                             <span className="material-symbols-outlined text-3xl">storefront</span>
                             <div>
@@ -269,7 +273,7 @@ function UserPanel({ stats, recent_orders }: any) {
             <section className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
                     <h4 className="text-lg font-bold text-slate-900 dark:text-white">My Recent Orders</h4>
-                    <Link href={route('orders.index')} className="text-xs font-bold text-primary hover:underline">View All</Link>
+                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
                 </div>
                 <div className="divide-y divide-slate-100 dark:divide-slate-800">
                     {recent_orders.length > 0 ? recent_orders.map((order: any) => (
