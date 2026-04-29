@@ -17,8 +17,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->unique()->word();
         return [
-            //
+            'name' => ucfirst($name),
+            'slug' => \Illuminate\Support\Str::slug($name),
+            'icon' => fake()->randomElement(['shopping_basket', 'construction', 'handyman', 'settings', 'hardware', 'build']),
         ];
     }
 }
