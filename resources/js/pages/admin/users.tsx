@@ -91,18 +91,31 @@ export default function UserManagement({ users, total_users, filters }: any) {
                 <section className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
                     <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
                         <div className="flex gap-2">
-                            {['All', 'Shopkeepers', 'Clients', 'Pending KYC'].map((filter, idx) => (
-                                <button
-                                    key={filter}
-                                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                                        idx === 0
-                                            ? 'bg-primary text-white'
-                                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-                                    }`}
-                                >
-                                    {filter}
-                                </button>
-                            ))}
+                            {[
+                                { label: 'All', params: {} },
+                                { label: 'Shopkeepers', params: { role: 'shopkeeper' } },
+                                { label: 'Clients', params: { role: 'client' } },
+                                { label: 'Pending KYC', params: { kyc: 'pending' } }
+                            ].map((filter) => {
+                                const isActive = 
+                                    (filter.label === 'All' && !filters.role && !filters.kyc) ||
+                                    (filter.params.role === filters.role && filter.params.role) ||
+                                    (filter.params.kyc === filters.kyc && filter.params.kyc);
+                                    
+                                return (
+                                    <button
+                                        key={filter.label}
+                                        onClick={() => router.get(route('admin.users'), filter.params, { preserveState: true })}
+                                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                                            isActive
+                                                ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                                        }`}
+                                    >
+                                        {filter.label}
+                                    </button>
+                                );
+                            })}
                         </div>
                         <button className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
                             <span className="material-symbols-outlined text-sm">filter_list</span>

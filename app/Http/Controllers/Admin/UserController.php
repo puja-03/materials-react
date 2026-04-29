@@ -12,16 +12,29 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $role = $request->input('role');
+        $kyc = $request->input('kyc');
 
-        $users = User::when($search, function ($query, $search) {
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
-        })->latest()->get();
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->when($role, function ($query, $role) {
+                $query->where('role', $role);
+            })
+            ->when($kyc, function ($query, $kyc) {
+                $query->where('kyc_status', $kyc);
+            })
+            ->latest()
+            ->get();
 
         return Inertia::render('admin/users', [
             'users' => $users,
             'total_users' => User::count(),
-            'filters' => $request->only(['search']),
+            'filters' => $request->only(['search', 'role', 'kyc']),
         ]);
     }
 
