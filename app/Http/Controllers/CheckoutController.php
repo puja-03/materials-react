@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use App\Services\WalletService;
+
 class CheckoutController extends Controller
 {
+    public function __construct(protected WalletService $walletService) {}
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -42,10 +47,16 @@ class CheckoutController extends Controller
             // Add GST 18%
             $totalAmount *= 1.18;
 
+            $user = Auth::user() ?? User::find(1); // Fallback for demo
+
+            if ($validated['payment_method'] === 'wallet' && $user->wallet->balance < $totalAmount) {
+                return back()->withErrors(['wallet' => 'Insufficient wallet balance.']);
+            }
+
             $order = Order::create([
-                'user_id' => Auth::id() ?? 1, // Fallback for demo
+                'user_id' => $user->id,
                 'total_amount' => $totalAmount,
-                'status' => 'pending',
+                'status' => $validated['payment_method'] === 'wallet' ? 'paid' : 'pending',
                 'shipping_address' => $validated['shipping_address'],
                 'phone_number' => $validated['phone_number'],
                 'pincode' => $validated['pincode'],
@@ -54,6 +65,11 @@ class CheckoutController extends Controller
 
             foreach ($itemsToCreate as $itemData) {
                 $order->items()->create($itemData);
+            }
+
+            // Split payment between Admin and Seller
+            if ($order->status === 'paid') {
+                $this->walletService->processOrderPayment($order);
             }
 
             return redirect()->route('orders.track', $order->id);
