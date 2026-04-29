@@ -40,7 +40,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('wallet', [WalletController::class, 'index'])->name('wallet.index');
     Route::post('wallet/add', [WalletController::class, 'addMoney'])->name('wallet.add');
     Route::post('wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw');
-
     // Admin Specific
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::patch('products/{product}/price', [ProductController::class, 'updatePrice'])->name('products.price');
