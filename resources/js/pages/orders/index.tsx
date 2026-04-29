@@ -25,7 +25,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
     };
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
             <Head title={isAdmin ? 'All Orders — Admin' : isSeller ? 'My Sales' : 'My Orders'} />
 
             {/* Header */}

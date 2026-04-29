@@ -11,7 +11,7 @@ import admin from '@/routes/admin';
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 className="text-2xl font-black text-slate-900 dark:text-white">Admin Dashboard</h2>
@@ -105,7 +105,7 @@ function AdminPanel({ stats, recent_orders }: any) {
 // ─── Seller Panel ─────────────────────────────────────────────────────────────
 function SellerPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 className="text-2xl font-black text-slate-900 dark:text-white">Seller Dashboard</h2>
@@ -212,7 +212,7 @@ function SellerPanel({ stats, recent_orders }: any) {
 // ─── User Panel ───────────────────────────────────────────────────────────────
 function UserPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 className="text-2xl font-black text-slate-900 dark:text-white">My Dashboard</h2>
