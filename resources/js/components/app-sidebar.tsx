@@ -16,6 +16,8 @@ import {
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
+import { users } from '@/routes/admin';
+
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
@@ -24,7 +26,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Users',
-        href: '#',
+        href: users.url(),
         icon: 'group',
     },
     {

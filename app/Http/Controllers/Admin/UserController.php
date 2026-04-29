@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,11 +16,11 @@ class UserController extends Controller
         $role = $request->input('role');
         $kyc = $request->input('kyc');
 
-        $users = User::query()
+        $query = User::query()
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                      ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('email', 'like', "%{$search}%");
                 });
             })
             ->when($role, function ($query, $role) {
@@ -28,12 +29,23 @@ class UserController extends Controller
             ->when($kyc, function ($query, $kyc) {
                 $query->where('kyc_status', $kyc);
             })
-            ->latest()
-            ->get();
+            ->latest();
+
+        $users = $query->paginate(10)->withQueryString();
+
+        $stats = [
+            'total_users' => User::count(),
+            'active_shops' => User::where('role', 'shopkeeper')->count(),
+            'pending_verifications' => User::where('kyc_status', 'pending')->count(),
+            'monthly_revenue' => Order::whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year)
+                ->where('status', '!=', 'cancelled')
+                ->sum('total_amount'),
+        ];
 
         return Inertia::render('admin/users', [
             'users' => $users,
-            'total_users' => User::count(),
+            'stats' => $stats,
             'filters' => $request->only(['search', 'role', 'kyc']),
         ]);
     }
