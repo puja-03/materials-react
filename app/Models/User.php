@@ -37,4 +37,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function wallet()
+    {
+        return $this->morphOne(Wallet::class, 'owner');
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->wallet()->create(['balance' => 0]);
+        });
+    }
 }
