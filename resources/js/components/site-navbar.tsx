@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { dashboard, login, register } from '@/routes';
 import { index as productsIndex } from '@/routes/products/index';
+import FlashMessage from './flash-message';
 
 export default function SiteNavbar() {
     const { auth } = usePage().props as any;
@@ -49,6 +50,7 @@ export default function SiteNavbar() {
                     )}
                 </div>
             </nav>
+            <FlashMessage />
         </header>
     );
 }
