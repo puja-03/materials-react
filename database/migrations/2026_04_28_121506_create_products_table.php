@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('unit');
             $table->string('image_url')->nullable();
             $table->string('vendor_name');
+            $table->integer('stock')->default(0);
             $table->timestamps();
         });
     }
