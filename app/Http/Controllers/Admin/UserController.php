@@ -16,11 +16,12 @@ class UserController extends Controller
         $role = $request->input('role');
         $kyc = $request->input('kyc');
 
-        $query = User::query()
+        $users = User::with('wallet')
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('id', 'like', "%{$search}%");
                 });
             })
             ->when($role, function ($query, $role) {
@@ -29,9 +30,9 @@ class UserController extends Controller
             ->when($kyc, function ($query, $kyc) {
                 $query->where('kyc_status', $kyc);
             })
-            ->latest();
-
-        $users = $query->paginate(10)->withQueryString();
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         $stats = [
             'total_users' => User::count(),
