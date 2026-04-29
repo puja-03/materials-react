@@ -32,10 +32,13 @@ export default function OrderTrack({ order }: { order: any }) {
             <main className="max-w-7xl mx-auto px-6 py-12 w-full flex-grow">
                 {/* Back Button */}
                 <div className="mb-8">
-                    <button className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                    <Link 
+                        href={route('orders.index')}
+                        className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"
+                    >
                         <span className="material-symbols-outlined text-[20px]">arrow_back</span>
                         Back to orders
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
