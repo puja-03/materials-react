@@ -196,10 +196,22 @@ export default function Dashboard({ total_orders, total_products, total_users, r
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2">
-                                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all">
+                                                <Link 
+                                                    href={route('products.edit', product.id)}
+                                                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
+                                                >
                                                     <span className="material-symbols-outlined text-[18px]">edit</span>
-                                                </button>
-                                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-destructive transition-all">
+                                                </Link>
+                                                <button 
+                                                    onClick={() => {
+                                                        if (confirm('Are you sure you want to remove this product from the marketplace?')) {
+                                                            import('@inertiajs/react').then(({ router }) => {
+                                                                router.delete(route('products.destroy', product.id));
+                                                            });
+                                                        }
+                                                    }}
+                                                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-destructive transition-all"
+                                                >
                                                     <span className="material-symbols-outlined text-[18px]">delete</span>
                                                 </button>
                                             </div>
