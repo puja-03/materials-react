@@ -149,12 +149,24 @@ export default function UserManagement({ users, total_users }: any) {
                                         </td>
                                         <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{new Date(user.created_at).toLocaleDateString()}</td>
                                         <td className="px-6 py-4 text-right">
-                                            <div className="flex justify-end gap-2">
+                                            <div className="flex justify-end gap-2 items-center">
+                                                <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1 mr-4">
+                                                    {['client', 'shopkeeper', 'admin'].map((r) => (
+                                                        <button
+                                                            key={r}
+                                                            onClick={() => router.patch(route('admin.users.role', user.id), { role: r })}
+                                                            className={`px-2 py-1 text-[9px] font-black uppercase rounded transition-all ${
+                                                                user.role === r 
+                                                                    ? 'bg-white dark:bg-slate-700 shadow-sm text-primary' 
+                                                                    : 'text-slate-400 hover:text-slate-600'
+                                                            }`}
+                                                        >
+                                                            {r.replace('keeper', '')}
+                                                        </button>
+                                                    ))}
+                                                </div>
                                                 <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-all">
                                                     <span className="material-symbols-outlined text-lg">visibility</span>
-                                                </button>
-                                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-all">
-                                                    <span className="material-symbols-outlined text-lg">more_vert</span>
                                                 </button>
                                             </div>
                                         </td>

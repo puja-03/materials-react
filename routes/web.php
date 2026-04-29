@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('products', [ProductController::class, 'store'])->name('products.store');
     Route::get('admin/users', [UserController::class, 'index'])->name('admin.users')->middleware('admin');
+    Route::patch('admin/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.role')->middleware('admin');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{id}/track', [OrderController::class, 'show'])->name('orders.track');
 });

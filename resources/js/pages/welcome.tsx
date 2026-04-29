@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
 
-export default function Welcome() {
+export default function Welcome({ featuredProducts }: { featuredProducts: any[] }) {
     return (
         <div className="flex flex-col min-h-screen bg-surface text-on-surface">
             <Head title="Materials Market - India's First Direct Hardware Marketplace" />
@@ -72,6 +72,41 @@ export default function Welcome() {
                             <p className="opacity-90 leading-relaxed">
                                 Access a direct marketplace where you see transparent pricing from thousands of verified shops. Order in seconds, track deliveries, and manage your entire hardware inventory from a single screen.
                             </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Featured Products Section */}
+                <section className="py-16 md:py-24 px-6">
+                    <div className="max-w-screen-2xl mx-auto">
+                        <div className="flex justify-between items-end mb-12">
+                            <div>
+                                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Featured Materials</h2>
+                                <p className="text-slate-500 mt-2">Latest arrivals from verified vendors</p>
+                            </div>
+                            <Link href={route('products.index')} className="text-primary font-bold hover:underline">View All Materials →</Link>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {featuredProducts.map((product) => (
+                                <div key={product.id} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all group">
+                                    <div className="relative aspect-square overflow-hidden">
+                                        <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={product.image_url} alt={product.name} />
+                                        <div className="absolute top-4 left-4">
+                                            <span className="px-2 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm">{product.category?.name || 'Material'}</span>
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{product.name}</h3>
+                                        <p className="text-xs text-slate-500 mb-4 line-clamp-1">{product.description}</p>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-lg font-black text-slate-900 dark:text-white">₹{parseFloat(product.price).toLocaleString()}</span>
+                                            <Link href={route('products.index')} className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
+                                                <span className="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -166,7 +201,7 @@ export default function Welcome() {
                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to Cut the Middleman?</h2>
                         <p className="text-slate-400 text-lg mb-12 relative z-10 max-w-xl mx-auto">Join 5,000+ shops and contractors who are already scaling their businesses with Materials Market.</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                            <button className="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors">Get Started Now</button>
+                            <Link href={route('register')} className="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors">Get Started Now</Link>
                             <button className="px-8 py-3 border border-slate-700 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">Talk to Sales</button>
                         </div>
                     </div>

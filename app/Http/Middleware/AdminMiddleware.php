@@ -13,7 +13,7 @@ class AdminMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Illuminate\Http\Request $request, Closure $next): Symfony\Component\HttpFoundation\Response
+    public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check() && auth()->user()->role === 'admin') {
             return $next($request);
