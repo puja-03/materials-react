@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import SiteNavbar from '@/components/site-navbar';
 import SiteFooter from '@/components/site-footer';
+import { register, products } from '@/routes';
 
 export default function Welcome({ featuredProducts }: { featuredProducts: any[] }) {
     return (
@@ -23,14 +24,14 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                                 <Link
-                                    href={route('products.index')}
+                                    href={products.index.url()}
                                     className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:shadow-lg transition-all active:scale-95"
                                 >
                                     <span className="material-symbols-outlined">shopping_basket</span>
                                     Explore Materials
                                 </Link>
                                 <Link
-                                    href={route('register')}
+                                    href={register.url()}
                                     className="flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-lg rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 shadow-sm"
                                 >
                                     <span className="material-symbols-outlined">storefront</span>
@@ -84,7 +85,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                                 <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Featured Materials</h2>
                                 <p className="text-slate-500 mt-2">Latest arrivals from verified vendors</p>
                             </div>
-                            <Link href={route('products.index')} className="text-primary font-bold hover:underline">View All Materials →</Link>
+                            <Link href={products.index.url()} className="text-primary font-bold hover:underline">View All Materials →</Link>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             {featuredProducts.map((product) => (
@@ -100,7 +101,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                                         <p className="text-xs text-slate-500 mb-4 line-clamp-1">{product.description}</p>
                                         <div className="flex justify-between items-center">
                                             <span className="text-lg font-black text-slate-900 dark:text-white">₹{parseFloat(product.price).toLocaleString()}</span>
-                                            <Link href={route('products.index')} className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
+                                            <Link href={products.index.url()} className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
                                                 <span className="material-symbols-outlined text-[20px]">add_shopping_cart</span>
                                             </Link>
                                         </div>
@@ -201,7 +202,7 @@ export default function Welcome({ featuredProducts }: { featuredProducts: any[] 
                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to Cut the Middleman?</h2>
                         <p className="text-slate-400 text-lg mb-12 relative z-10 max-w-xl mx-auto">Join 5,000+ shops and contractors who are already scaling their businesses with Materials Market.</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                            <Link href={route('register')} className="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors">Get Started Now</Link>
+                            <Link href={register.url()} className="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors">Get Started Now</Link>
                             <button className="px-8 py-3 border border-slate-700 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">Talk to Sales</button>
                         </div>
                     </div>
