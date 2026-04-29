@@ -44,6 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin Specific
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::patch('products/{product}/price', [ProductController::class, 'updatePrice'])->name('products.price');
+        Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
+        Route::patch('orders/{order}/refund', [OrderController::class, 'refund'])->name('orders.refund');
     });
 });
 
