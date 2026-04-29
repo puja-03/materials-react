@@ -15,6 +15,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WalletController;
 use App\Models\Product;
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
@@ -34,6 +35,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('admin/users/{user}/kyc-status', [UserController::class, 'updateKycStatus'])->name('admin.users.kyc')->middleware('admin');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{id}/track', [OrderController::class, 'show'])->name('orders.track');
+
+    // Wallet Routes
+    Route::get('wallet', [WalletController::class, 'index'])->name('wallet.index');
+    Route::post('wallet/add', [WalletController::class, 'addMoney'])->name('wallet.add');
+    Route::post('wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw');
+
+    // Admin Specific
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::patch('products/{product}/price', [ProductController::class, 'updatePrice'])->name('products.price');
+    });
 });
 
 require __DIR__.'/settings.php';
