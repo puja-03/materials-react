@@ -11,113 +11,138 @@ import admin from '@/routes/admin';
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="p-8 w-full space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 bg-white dark:bg-slate-950">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">Admin Dashboard</h2>
-                    <p className="text-sm text-slate-500 mt-0.5">Platform-wide overview & controls</p>
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 rounded-full bg-purple-600 dark:bg-purple-500 animate-pulse"></span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">System: PLATFORM_NUCLEUS</span>
+                    </div>
+                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Executive Control Center</h2>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Holistic oversight of materials market operations and capital flow.</p>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-full border border-purple-100 dark:border-purple-800">
-                    <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>admin_panel_settings</span>
-                    <span className="text-[11px] font-bold uppercase tracking-tight">Super Admin Access</span>
+                <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 rounded-2xl border border-purple-100 dark:border-purple-900 shadow-sm">
+                        <span className="material-symbols-outlined text-[18px]">verified_user</span>
+                        <span className="text-[11px] font-bold uppercase tracking-widest">Root Authority</span>
+                    </div>
                 </div>
             </div>
 
-            {/* Main Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Big Revenue Card */}
-                <div className="md:col-span-1 relative overflow-hidden bg-slate-900 dark:bg-white p-7 rounded-3xl text-white dark:text-slate-900 shadow-xl shadow-slate-900/20 dark:shadow-white/10">
-                    <div className="relative z-10">
-                        <p className="text-white/60 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">Total Platform Revenue</p>
-                        <h2 className="text-4xl font-black mt-2 tracking-tight">₹{Number(stats.total_revenue || 0).toLocaleString()}</h2>
-                        <div className="mt-5 flex items-center gap-2">
-                            <span className="flex items-center gap-1 text-[10px] font-black bg-emerald-500 text-white px-2 py-0.5 rounded-full uppercase tracking-tight">
-                                <span className="material-symbols-outlined text-[12px]">trending_up</span>
+            {/* Metrics Engine */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Primary Liquidity Card */}
+                <div className="lg:col-span-1 relative overflow-hidden bg-slate-900 dark:bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-2xl shadow-slate-900/20 group">
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">Gross Market Volume</p>
+                            <h2 className="text-5xl font-semibold mt-4 tracking-tighter">₹{Number(stats.total_revenue || 0).toLocaleString()}</h2>
+                        </div>
+                        <div className="mt-8 flex items-center gap-3">
+                            <span className="flex items-center gap-1.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-xl border border-emerald-500/20 uppercase tracking-widest">
+                                <span className="material-symbols-outlined text-[14px]">trending_up</span>
                                 +18.2%
                             </span>
-                            <span className="text-[10px] text-white/40 dark:text-slate-400 font-bold uppercase">vs last month</span>
+                            <span className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">Performance/Mo</span>
                         </div>
                     </div>
-                    <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/5 dark:bg-slate-900/5 rounded-full blur-2xl"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-all group-hover:bg-indigo-600/20"></div>
                 </div>
 
-                {/* Small stats & Links */}
-                <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Secondary Metrics */}
+                <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6">
                     {[
-                        { label: 'Commission', value: `₹${Number(stats.total_commission || 0).toLocaleString()}`, icon: 'account_balance', color: 'bg-primary/10 text-primary', badge: '5% Cut' },
-                        { label: 'Total Users', value: Number(stats.total_users || 0).toLocaleString(), icon: 'group', color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600', badge: 'Platform' },
-                        { label: 'Products', value: Number(stats.total_products || 0).toLocaleString(), icon: 'inventory_2', color: 'bg-amber-50 dark:bg-amber-900/20 text-amber-600', badge: 'Listed' },
+                        { label: 'Platform Revenue', value: `₹${Number(stats.total_commission || 0).toLocaleString()}`, icon: 'payments', color: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-50 dark:bg-indigo-500/10', border: 'border-indigo-100 dark:border-indigo-900', badge: 'Net Yield' },
+                        { label: 'Network Nodes', value: Number(stats.total_users || 0).toLocaleString(), icon: 'hub', color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10', border: 'border-blue-100 dark:border-blue-900', badge: 'Userbase' },
+                        { label: 'Asset Inventory', value: Number(stats.total_products || 0).toLocaleString(), icon: 'inventory_2', color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-100 dark:border-amber-900', badge: 'SKU Count' },
                     ].map((s) => (
-                        <div key={s.label} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col gap-3">
-                            <div className="flex justify-between items-center">
-                                <div className={`p-2.5 rounded-xl ${s.color}`}>
-                                    <span className="material-symbols-outlined text-[20px]">{s.icon}</span>
+                        <div key={s.label} className="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                            <div className="flex justify-between items-start">
+                                <div className={`w-12 h-12 flex items-center justify-center rounded-2xl ${s.bg} ${s.color} ${s.border} border transition-transform group-hover:scale-110`}>
+                                    <span className="material-symbols-outlined text-[22px]">{s.icon}</span>
                                 </div>
-                                <span className="text-[9px] font-black uppercase text-slate-400 bg-slate-50 dark:bg-slate-800 px-1.5 py-0.5 rounded">{s.badge}</span>
+                                <span className="text-[9px] font-bold uppercase text-slate-400 tracking-widest">{s.badge}</span>
                             </div>
-                            <div>
-                                <p className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">{s.label}</p>
-                                <h3 className="text-xl font-black text-slate-900 dark:text-white">{s.value}</h3>
+                            <div className="mt-6">
+                                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium mb-1">{s.label}</p>
+                                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">{s.value}</h3>
                             </div>
                         </div>
                     ))}
 
-                    {/* Quick Links */}
-                    <div className="sm:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {/* Navigation Hub */}
+                    <div className="sm:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                         {[
-                            { label: 'Users', icon: 'manage_accounts', href: admin.users.url(), color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-700' },
-                            { label: 'Orders', icon: 'receipt_long', href: orders.index.url(), color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700' },
-                            { label: 'Wallet', icon: 'account_balance_wallet', href: wallet.index.url(), color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700' },
-                            { label: 'Items', icon: 'inventory', href: products.index.url(), color: 'bg-amber-50 dark:bg-amber-900/20 text-amber-700' },
+                            { label: 'Registry', icon: 'manage_accounts', href: admin.users.url(), color: 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100' },
+                            { label: 'Ledger', icon: 'receipt_long', href: orders.index.url(), color: 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100' },
+                            { label: 'Treasury', icon: 'account_balance_wallet', href: wallet.index.url(), color: 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100' },
+                            { label: 'Assets', icon: 'inventory', href: products.index.url(), color: 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100' },
                         ].map((q) => (
-                            <Link key={q.label} href={q.href} className={`flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900 transition-all group`}>
-                                <div className={`p-2 rounded-xl ${q.color} group-hover:scale-110 transition-all`}>
+                            <Link key={q.label} href={q.href} className={`flex items-center gap-3 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 bg-white dark:bg-slate-900 transition-all group shadow-sm`}>
+                                <div className={`w-10 h-10 flex items-center justify-center rounded-xl ${q.color} transition-all group-hover:bg-indigo-600 group-hover:text-white`}>
                                     <span className="material-symbols-outlined text-[20px]">{q.icon}</span>
                                 </div>
-                                <span className="text-[10px] font-black uppercase text-slate-600 dark:text-slate-400">{q.label}</span>
+                                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">{q.label}</span>
                             </Link>
                         ))}
                     </div>
                 </div>
             </div>
 
-            {/* Recent Orders Table */}
-            <section className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">Recent Platform Orders</h4>
-                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
+            {/* Audit Logs */}
+            <section className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/30 dark:bg-slate-800/20">
+                    <div>
+                        <h4 className="text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Real-time Transaction Feed</h4>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Stream: LEDGER_RECAP_LATEST</p>
+                    </div>
+                    <Link href={orders.index.url()} className="flex items-center gap-2 text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest hover:translate-x-1 transition-transform">
+                        Access Full Ledger
+                        <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+                    </Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-[10px] font-black uppercase tracking-widest">
-                            <tr>
-                                <th className="px-6 py-4">Order</th>
-                                <th className="px-6 py-4">Customer</th>
-                                <th className="px-6 py-4">Amount</th>
-                                <th className="px-6 py-4 text-emerald-600">Cut (5%)</th>
-                                <th className="px-6 py-4">Status</th>
+                        <thead>
+                            <tr className="bg-slate-50/50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] border-b border-slate-100 dark:border-slate-800">
+                                <th className="px-8 py-5">Entry Token</th>
+                                <th className="px-8 py-5">Agent Node</th>
+                                <th className="px-8 py-5">Value</th>
+                                <th className="px-8 py-5 text-indigo-600 dark:text-indigo-400">Yield</th>
+                                <th className="px-8 py-5">Status</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                             {recent_orders.length > 0 ? recent_orders.map((order: any) => (
-                                <tr key={order.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-white">#{String(order.id).padStart(5, '0')}</td>
-                                    <td className="px-6 py-4">
-                                        <p className="text-xs font-bold text-slate-700 dark:text-slate-300">{order.user?.name || 'Guest'}</p>
-                                        <p className="text-[10px] text-slate-400">{order.user?.email || ''}</p>
+                                <tr key={order.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors group">
+                                    <td className="px-8 py-5">
+                                        <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">#{String(order.id).padStart(5, '0')}</span>
+                                        <p className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-tighter mt-1">{new Date(order.created_at).toLocaleDateString()}</p>
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-black">₹{Number(order.total_amount).toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-sm font-bold text-emerald-600">₹{Number(order.admin_commission_amount || 0).toLocaleString()}</td>
-                                    <td className="px-6 py-4">
-                                        <span className={`text-[9px] px-2 py-0.5 rounded-full font-black uppercase ${
-                                            order.status === 'paid' ? 'bg-emerald-100 text-emerald-700' :
-                                            order.status === 'pending' ? 'bg-amber-100 text-amber-700' :
-                                            'bg-slate-100 text-slate-600'
-                                        }`}>{order.status}</span>
+                                    <td className="px-8 py-5">
+                                        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">{order.user?.name || 'External Agent'}</p>
+                                        <p className="text-[10px] text-slate-400 dark:text-slate-500 tracking-tight">{order.user?.email || 'N/A'}</p>
+                                    </td>
+                                    <td className="px-8 py-5 text-sm font-semibold text-slate-900 dark:text-white">₹{Number(order.total_amount).toLocaleString()}</td>
+                                    <td className="px-8 py-5 text-sm font-bold text-indigo-600 dark:text-indigo-400">₹{Number(order.admin_commission_amount || 0).toLocaleString()}</td>
+                                    <td className="px-8 py-5">
+                                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border ${
+                                            order.status === 'paid' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900' :
+                                            order.status === 'pending' ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900' :
+                                            'bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-100 dark:border-slate-700'
+                                        }`}>
+                                            <span className={`w-1 h-1 rounded-full ${order.status === 'paid' ? 'bg-emerald-500' : 'bg-current'}`}></span>
+                                            {order.status}
+                                        </span>
                                     </td>
                                 </tr>
                             )) : (
-                                <tr><td colSpan={5} className="px-6 py-12 text-center text-slate-400 font-medium">No orders yet.</td></tr>
+                                <tr><td colSpan={5} className="px-8 py-24 text-center">
+                                    <div className="flex flex-col items-center gap-4 opacity-20">
+                                        <span className="material-symbols-outlined text-6xl">inventory_2</span>
+                                        <p className="text-sm font-bold uppercase tracking-[0.2em]">Void Buffer</p>
+                                    </div>
+                                </td></tr>
                             )}
                         </tbody>
                     </table>
@@ -130,101 +155,122 @@ function AdminPanel({ stats, recent_orders }: any) {
 // ─── Seller Panel ─────────────────────────────────────────────────────────────
 function SellerPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="p-8 w-full space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 bg-white dark:bg-slate-950">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">Seller Dashboard</h2>
-                    <p className="text-sm text-slate-500 mt-0.5">Track your sales, earnings, and inventory</p>
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-500"></span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Node: MERCHANT_OPERATIONS</span>
+                    </div>
+                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Merchant Command</h2>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Real-time asset management and revenue optimization.</p>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full border border-blue-100 dark:border-blue-800">
-                    <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>storefront</span>
-                    <span className="text-[11px] font-bold uppercase tracking-tight">Verified Seller</span>
+                <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 rounded-2xl border border-indigo-100 dark:border-indigo-900 shadow-sm">
+                        <span className="material-symbols-outlined text-[18px]">storefront</span>
+                        <span className="text-[11px] font-bold uppercase tracking-widest">Verified Merchant</span>
+                    </div>
                 </div>
             </div>
 
-            {/* Wallet Card + Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Big wallet */}
-                <div className="md:col-span-1 relative overflow-hidden bg-primary p-7 rounded-3xl text-white shadow-xl shadow-primary/20">
-                    <div className="relative z-10">
-                        <p className="text-primary-foreground/70 text-xs font-bold uppercase tracking-wider">Total Earnings</p>
-                        <h2 className="text-4xl font-black mt-2 tracking-tight">₹{Number(stats.my_earnings || 0).toLocaleString()}</h2>
-                        <Link href={wallet.index.url()} className="mt-5 inline-flex items-center gap-2 bg-white/20 border border-white/20 text-white font-bold px-4 py-2 rounded-lg hover:bg-white/30 transition-all text-sm">
+            {/* Merchant Metrics */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Liquidity Card */}
+                <div className="lg:col-span-1 relative overflow-hidden bg-slate-900 dark:bg-indigo-600 p-8 rounded-[2.5rem] text-white shadow-2xl shadow-indigo-500/20 group">
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p className="text-white/60 text-[10px] font-bold uppercase tracking-[0.2em]">Net Capital Yield</p>
+                            <h2 className="text-5xl font-semibold mt-4 tracking-tighter">₹{Number(stats.my_earnings || 0).toLocaleString()}</h2>
+                        </div>
+                        <Link href={wallet.index.url()} className="mt-10 inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-6 py-3 rounded-2xl transition-all text-[11px] uppercase tracking-widest">
                             <span className="material-symbols-outlined text-[18px]">account_balance_wallet</span>
-                            Manage Wallet
+                            Access Treasury
                         </Link>
                     </div>
-                    <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-                    <div className="absolute -left-6 -top-6 w-20 h-20 bg-white/5 rounded-full blur-xl"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] -mr-32 -mt-32"></div>
                 </div>
 
-                {/* Small stats */}
-                <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Performance Grids */}
+                <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6">
                     {[
-                        { label: 'Total Sales', value: Number(stats.total_sales || 0), icon: 'shopping_cart_checkout', color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600', badge: 'Paid' },
-                        { label: 'My Products', value: Number(stats.my_products || 0), icon: 'inventory_2', color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600', badge: 'Listed' },
-                        { label: 'Pending', value: Number(stats.pending_orders || 0), icon: 'pending_actions', color: 'bg-amber-50 dark:bg-amber-900/20 text-amber-600', badge: 'Action' },
+                        { label: 'Asset Sales', value: Number(stats.total_sales || 0), icon: 'shopping_cart_checkout', color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10', border: 'border-blue-100 dark:border-blue-900', badge: 'Fulfilled' },
+                        { label: 'Market Assets', value: Number(stats.my_products || 0), icon: 'inventory_2', color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-500/10', border: 'border-emerald-100 dark:border-emerald-900', badge: 'Live SKU' },
+                        { label: 'Pending Action', value: Number(stats.pending_orders || 0), icon: 'pending_actions', color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-100 dark:border-amber-900', badge: 'Critical' },
                     ].map((s) => (
-                        <div key={s.label} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col gap-3">
-                            <div className="flex justify-between items-center">
-                                <div className={`p-2.5 rounded-xl ${s.color}`}>
-                                    <span className="material-symbols-outlined text-[20px]">{s.icon}</span>
+                        <div key={s.label} className="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                            <div className="flex justify-between items-start">
+                                <div className={`w-12 h-12 flex items-center justify-center rounded-2xl ${s.bg} ${s.color} ${s.border} border transition-transform group-hover:scale-110`}>
+                                    <span className="material-symbols-outlined text-[22px]">{s.icon}</span>
                                 </div>
-                                <span className="text-[9px] font-black uppercase text-slate-400 bg-slate-50 dark:bg-slate-800 px-1.5 py-0.5 rounded">{s.badge}</span>
+                                <span className="text-[9px] font-bold uppercase text-slate-400 tracking-widest">{s.badge}</span>
                             </div>
-                            <div>
-                                <p className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">{s.label}</p>
-                                <h3 className="text-xl font-black text-slate-900 dark:text-white">{s.value.toLocaleString()}</h3>
+                            <div className="mt-6">
+                                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium mb-1">{s.label}</p>
+                                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">{s.value.toLocaleString()}</h3>
                             </div>
                         </div>
                     ))}
 
-                    {/* Quick Actions */}
-                    <div className="sm:col-span-3 flex flex-wrap gap-3">
-                        <Link href={products.create.url()} className="flex-1 flex items-center justify-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3 rounded-2xl font-black text-xs hover:scale-[1.02] transition-all shadow-lg">
-                            <span className="material-symbols-outlined text-[18px]">add_circle</span>
-                            LIST NEW PRODUCT
+                    {/* Operational Actions */}
+                    <div className="sm:col-span-3 flex flex-wrap gap-4 pt-2">
+                        <Link href={products.create.url()} className="flex-1 flex items-center justify-center gap-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-900/10">
+                            <span className="material-symbols-outlined text-[20px]">add_circle</span>
+                            Initialize New Asset
                         </Link>
-                        <Link href={orders.index.url()} className="flex-1 flex items-center justify-center gap-2 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-2xl font-black text-xs hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                            <span className="material-symbols-outlined text-[18px]">receipt_long</span>
-                            VIEW MY ORDERS
+                        <Link href={orders.index.url()} className="flex-1 flex items-center justify-center gap-3 border-2 border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-8 py-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                            <span className="material-symbols-outlined text-[20px]">receipt_long</span>
+                            Audit Sales Ledger
                         </Link>
                     </div>
                 </div>
             </div>
 
-            {/* Recent Orders */}
-            <section className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">Recent Sales</h4>
-                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
+            {/* Sales Feed */}
+            <section className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/30 dark:bg-slate-800/20">
+                    <div>
+                        <h4 className="text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Recent Sales Stream</h4>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Source: TRANSACTION_LOG_SELLER</p>
+                    </div>
+                    <Link href={orders.index.url()} className="flex items-center gap-2 text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest hover:translate-x-1 transition-transform">
+                        View History
+                        <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+                    </Link>
                 </div>
                 <div className="divide-y divide-slate-100 dark:divide-slate-800">
                     {recent_orders.length > 0 ? recent_orders.map((order: any) => (
-                        <div key={order.id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
+                        <div key={order.id} className="px-8 py-6 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                            <div className="flex items-center gap-5">
+                                <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900 flex items-center justify-center transition-transform group-hover:scale-110">
+                                    <span className="material-symbols-outlined text-[24px]">shopping_bag</span>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-bold text-slate-900 dark:text-white">Order #{String(order.id).padStart(5, '0')}</p>
-                                    <p className="text-[10px] text-slate-500 uppercase font-bold">{order.user?.name || 'Customer'}</p>
+                                    <p className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">Order Token #{String(order.id).padStart(5, '0')}</p>
+                                    <p className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest font-medium mt-0.5">{order.user?.name || 'External Agent'}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4">
-                                <div className="text-right mr-2">
-                                    <p className="text-sm font-black text-slate-900 dark:text-white">₹{Number(order.seller_amount || 0).toLocaleString()}</p>
-                                    <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-tight">Your Share</p>
+                            <div className="flex items-center gap-8">
+                                <div className="text-right">
+                                    <p className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">₹{Number(order.seller_amount || 0).toLocaleString()}</p>
+                                    <p className="text-[9px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-widest">Revenue Share</p>
                                 </div>
-                                <span className={`text-[9px] px-2 py-0.5 rounded-full font-black uppercase ${
-                                    order.status === 'paid' ? 'bg-emerald-100 text-emerald-700' :
-                                    order.status === 'pending' ? 'bg-amber-100 text-amber-700' :
-                                    'bg-slate-100 text-slate-600'
-                                }`}>{order.status}</span>
+                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border ${
+                                    order.status === 'paid' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900' :
+                                    order.status === 'pending' ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900' :
+                                    'bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-100 dark:border-slate-700'
+                                }`}>
+                                    <span className={`w-1 h-1 rounded-full ${order.status === 'paid' ? 'bg-emerald-500' : 'bg-current'}`}></span>
+                                    {order.status}
+                                </span>
                             </div>
                         </div>
                     )) : (
-                        <div className="px-6 py-12 text-center text-slate-400 font-medium">No sales yet.</div>
+                        <div className="px-8 py-24 text-center">
+                            <div className="flex flex-col items-center gap-4 opacity-20">
+                                <span className="material-symbols-outlined text-6xl">receipt_long</span>
+                                <p className="text-sm font-bold uppercase tracking-[0.2em]">Void Transaction Record</p>
+                            </div>
+                        </div>
                     )}
                 </div>
             </section>
@@ -235,96 +281,116 @@ function SellerPanel({ stats, recent_orders }: any) {
 // ─── User Panel ───────────────────────────────────────────────────────────────
 function UserPanel({ stats, recent_orders }: any) {
     return (
-        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="p-8 w-full space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 bg-white dark:bg-slate-950">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">My Dashboard</h2>
-                    <p className="text-sm text-slate-500 mt-0.5">Track your orders and manage your wallet</p>
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-500"></span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Node: CONSUMER_LEDGER</span>
+                    </div>
+                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Procurement Hub</h2>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage your active procurement streams and digital assets.</p>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-full border border-emerald-100 dark:border-emerald-800">
-                    <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                    <span className="text-[11px] font-bold uppercase tracking-tight">Verified Buyer</span>
+                <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-2xl border border-emerald-100 dark:border-emerald-900 shadow-sm">
+                        <span className="material-symbols-outlined text-[18px]">verified</span>
+                        <span className="text-[11px] font-bold uppercase tracking-widest">Verified Client</span>
+                    </div>
                 </div>
             </div>
 
-            {/* Wallet Card + Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Big wallet */}
-                <div className="md:col-span-1 relative overflow-hidden bg-primary p-7 rounded-3xl text-white shadow-xl shadow-primary/20">
-                    <div className="relative z-10">
-                        <p className="text-primary-foreground/70 text-xs font-bold uppercase tracking-wider">Wallet Balance</p>
-                        <h2 className="text-4xl font-black mt-2 tracking-tight">₹{Number(stats.wallet_balance || 0).toLocaleString()}</h2>
-                        <Link href={wallet.index.url()} className="mt-5 inline-flex items-center gap-2 bg-white/20 border border-white/20 text-white font-bold px-4 py-2 rounded-lg hover:bg-white/30 transition-all text-sm">
+            {/* Client Metrics */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Liquidity Card */}
+                <div className="lg:col-span-1 relative overflow-hidden bg-slate-900 dark:bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-2xl shadow-slate-900/20 group">
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">Available Liquidity</p>
+                            <h2 className="text-5xl font-semibold mt-4 tracking-tighter">₹{Number(stats.wallet_balance || 0).toLocaleString()}</h2>
+                        </div>
+                        <Link href={wallet.index.url()} className="mt-10 inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-6 py-3 rounded-2xl transition-all text-[11px] uppercase tracking-widest">
                             <span className="material-symbols-outlined text-[18px]">add</span>
-                            Add Money
+                            Capitalize Wallet
                         </Link>
                     </div>
-                    <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div className="absolute -right-12 -bottom-12 w-64 h-64 bg-indigo-600/10 rounded-full blur-[80px]"></div>
                 </div>
 
-                {/* Small stats */}
-                <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Status Metrics */}
+                <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {[
-                        { label: 'Total Orders', value: Number(stats.total_orders || 0), icon: 'package_2', color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600' },
-                        { label: 'Active Orders', value: Number(stats.active_orders || 0), icon: 'local_shipping', color: 'bg-amber-50 dark:bg-amber-900/20 text-amber-600' },
+                        { label: 'Total Procurements', value: Number(stats.total_orders || 0), icon: 'package_2', color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10', border: 'border-blue-100 dark:border-blue-900' },
+                        { label: 'In-Transit Assets', value: Number(stats.active_orders || 0), icon: 'local_shipping', color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-100 dark:border-amber-900' },
                     ].map((s) => (
-                        <div key={s.label} className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex items-center gap-4">
-                            <div className={`p-3 rounded-xl ${s.color}`}>
-                                <span className="material-symbols-outlined">{s.icon}</span>
+                        <div key={s.label} className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex items-center gap-6 group">
+                            <div className={`w-16 h-16 flex items-center justify-center rounded-2xl ${s.bg} ${s.color} ${s.border} border transition-transform group-hover:scale-110`}>
+                                <span className="material-symbols-outlined text-[28px]">{s.icon}</span>
                             </div>
                             <div>
-                                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">{s.label}</p>
-                                <h3 className="text-2xl font-bold mt-0.5 text-slate-900 dark:text-white">{s.value.toLocaleString()}</h3>
+                                <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-bold mb-1">{s.label}</p>
+                                <h3 className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tighter">{s.value.toLocaleString()}</h3>
                             </div>
                         </div>
                     ))}
 
-                    <Link href={products.index.url()} className="sm:col-span-2 flex items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all">
-                        <div className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-3xl">storefront</span>
+                    <Link href={products.index.url()} className="sm:col-span-2 flex items-center justify-between gap-6 p-8 rounded-[2.5rem] bg-indigo-600 text-white shadow-2xl shadow-indigo-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all group overflow-hidden relative">
+                        <div className="relative z-10 flex items-center gap-6">
+                            <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center">
+                                <span className="material-symbols-outlined text-[32px]">storefront</span>
+                            </div>
                             <div>
-                                <p className="font-black text-lg">Browse Marketplace</p>
-                                <p className="text-white/70 text-xs">Find the best materials & products</p>
+                                <p className="text-xl font-semibold tracking-tight">Marketplace Access</p>
+                                <p className="text-white/60 text-xs font-medium uppercase tracking-widest mt-1">Acquire New Materials & Assets</p>
                             </div>
                         </div>
-                        <span className="material-symbols-outlined text-2xl">chevron_right</span>
+                        <span className="material-symbols-outlined text-3xl opacity-40 group-hover:translate-x-2 transition-transform relative z-10">chevron_right</span>
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
                     </Link>
                 </div>
             </div>
 
-            {/* Recent Orders */}
-            <section className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">My Recent Orders</h4>
-                    <Link href={orders.index.url()} className="text-xs font-bold text-primary hover:underline">View All</Link>
+            {/* Procurements Feed */}
+            <section className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/30 dark:bg-slate-800/20">
+                    <div>
+                        <h4 className="text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Recent Activity Stream</h4>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Stream: PERSONAL_LEDGER_FEED</p>
+                    </div>
+                    <Link href={orders.index.url()} className="flex items-center gap-2 text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest hover:translate-x-1 transition-transform">
+                        Detailed Ledger
+                        <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+                    </Link>
                 </div>
                 <div className="divide-y divide-slate-100 dark:divide-slate-800">
                     {recent_orders.length > 0 ? recent_orders.map((order: any) => (
-                        <div key={order.id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-[20px]">package_2</span>
+                        <div key={order.id} className="px-8 py-6 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                            <div className="flex items-center gap-5">
+                                <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-100 dark:border-slate-800 flex items-center justify-center transition-all group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600">
+                                    <span className="material-symbols-outlined text-[24px]">package_2</span>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-bold text-slate-900 dark:text-white">Order #{String(order.id).padStart(5, '0')}</p>
-                                    <p className="text-xs text-slate-500">{new Date(order.created_at).toLocaleDateString()}</p>
+                                    <p className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">Token #{String(order.id).padStart(5, '0')}</p>
+                                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-medium mt-0.5">{new Date(order.created_at).toLocaleDateString()}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4">
-                                <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase ${
-                                    order.status === 'paid' ? 'bg-emerald-100 text-emerald-700' :
-                                    order.status === 'pending' ? 'bg-amber-100 text-amber-700' :
-                                    order.status === 'refunded' ? 'bg-blue-100 text-blue-700' :
-                                    'bg-slate-100 text-slate-600'
-                                }`}>{order.status}</span>
-                                <span className="text-sm font-black text-slate-900 dark:text-white">₹{Number(order.total_amount).toLocaleString()}</span>
+                            <div className="flex items-center gap-8">
+                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border ${
+                                    order.status === 'paid' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900' :
+                                    order.status === 'pending' ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900' :
+                                    order.status === 'refunded' ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-900' :
+                                    'bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-100 dark:border-slate-700'
+                                }`}>
+                                    <span className={`w-1 h-1 rounded-full ${order.status === 'paid' ? 'bg-emerald-500' : 'bg-current'}`}></span>
+                                    {order.status}
+                                </span>
+                                <span className="text-base font-semibold text-slate-900 dark:text-white tracking-tight">₹{Number(order.total_amount).toLocaleString()}</span>
                             </div>
                         </div>
                     )) : (
-                        <div className="px-6 py-20 text-center">
-                            <div className="flex flex-col items-center gap-3 opacity-30">
+                        <div className="px-8 py-24 text-center">
+                            <div className="flex flex-col items-center gap-4 opacity-20">
                                 <span className="material-symbols-outlined text-6xl">shopping_cart</span>
-                                <p className="font-bold">No orders yet. Start shopping!</p>
+                                <p className="text-sm font-bold uppercase tracking-[0.2em]">Procurement Record Void</p>
                             </div>
                         </div>
                     )}

@@ -17,32 +17,37 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
     );
 
     const statusColor = (status: string) => {
-        if (status === 'paid')      return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400';
-        if (status === 'pending')   return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400';
-        if (status === 'refunded')  return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400';
-        if (status === 'cancelled') return 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400';
-        return 'bg-slate-100 text-slate-600';
+        if (status === 'paid')      return 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900';
+        if (status === 'pending')   return 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900';
+        if (status === 'refunded')  return 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-900';
+        if (status === 'cancelled') return 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-100 dark:border-rose-900';
+        return 'bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-100 dark:border-slate-700';
     };
 
     return (
-        <div className="p-6 w-full space-y-8 animate-in fade-in duration-500">
-            <Head title={isAdmin ? 'All Orders — Admin' : isSeller ? 'My Sales' : 'My Orders'} />
+        <div className="p-8 w-full space-y-10 animate-in fade-in slide-in-from-bottom-2 duration-700 bg-white dark:bg-slate-950">
+            <Head title={isAdmin ? 'Platform Audit — Orders' : isSeller ? 'Merchant Sales' : 'Procurement History'} />
 
-            {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            {/* Header Section */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">
-                        {isAdmin ? 'All Platform Orders' : isSeller ? 'Sales Orders' : 'My Orders'}
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-500"></span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Database: TRANSACTION_LEDGER</span>
+                    </div>
+                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
+                        {isAdmin ? 'Global Order Ledger' : isSeller ? 'Merchant Sales Record' : 'Procurement History'}
                     </h2>
-                    <p className="text-sm text-slate-500 mt-0.5">
-                        {isAdmin ? 'Monitor, approve & refund any order' : isSeller ? 'Orders containing your products' : 'Track your purchase history'}
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        {isAdmin ? 'Platform-wide transaction monitoring and capital authorization.' : isSeller ? 'Real-time record of asset sales and revenue distribution.' : 'Detailed log of your industrial procurement operations.'}
                     </p>
                 </div>
-                <div className="relative w-full md:w-72">
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                
+                <div className="relative w-full md:w-80">
+                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-[20px]">search</span>
                     <input
-                        className="w-full pl-10 pr-4 py-2.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary outline-none"
-                        placeholder="Search by Order ID or Customer…"
+                        className="w-full pl-12 pr-4 py-3 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        placeholder="Search ledger entries..."
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
@@ -50,110 +55,95 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
             </div>
 
             {/* Orders Table */}
-            <section className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+            <section className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem] overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-[10px] font-black uppercase tracking-widest">
-                            <tr>
-                                <th className="px-6 py-4">Order</th>
-                                {(isAdmin || isSeller) && <th className="px-6 py-4">Customer</th>}
-                                <th className="px-6 py-4">Items</th>
-                                <th className="px-6 py-4">Amount</th>
-                                {isAdmin && <th className="px-6 py-4">Commission</th>}
-                                {isSeller && <th className="px-6 py-4">Your Earning</th>}
-                                <th className="px-6 py-4">Payment</th>
-                                <th className="px-6 py-4">Status</th>
-                                <th className="px-6 py-4 text-right">Actions</th>
+                        <thead>
+                            <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+                                <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Order Token</th>
+                                {(isAdmin || isSeller) && <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Agent Node</th>}
+                                <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Asset Stack</th>
+                                <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Transaction Value</th>
+                                {isAdmin && <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Commission</th>}
+                                {isSeller && <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">Revenue Share</th>}
+                                <th className="px-8 py-5 text-[10px] font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500 text-right">Audit Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                             {filtered.length > 0 ? filtered.map((order) => (
-                                <tr key={order.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td className="px-6 py-5">
-                                        <p className="font-bold text-slate-900 dark:text-white text-sm">#{String(order.id).padStart(6, '0')}</p>
-                                        <p className="text-[10px] text-slate-400 mt-0.5">{new Date(order.created_at).toLocaleDateString()}</p>
+                                <tr key={order.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                                    <td className="px-8 py-5">
+                                        <p className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">#{String(order.id).padStart(6, '0')}</p>
+                                        <p className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-tighter mt-1">{new Date(order.created_at).toLocaleDateString()}</p>
                                     </td>
                                     {(isAdmin || isSeller) && (
-                                        <td className="px-6 py-5">
-                                            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{order.user?.name || 'Guest'}</p>
-                                            <p className="text-[10px] text-slate-400">{order.user?.email || ''}</p>
+                                        <td className="px-8 py-5">
+                                            <p className="text-sm font-medium text-slate-900 dark:text-white">{order.user?.name || 'Guest User'}</p>
+                                            <p className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-tight">{order.user?.email || 'OFFLINE'}</p>
                                         </td>
                                     )}
-                                    <td className="px-6 py-5">
-                                        <div className="flex -space-x-2">
+                                    <td className="px-8 py-5">
+                                        <div className="flex -space-x-3">
                                             {(order.items || []).slice(0, 3).map((item: any, i: number) => (
-                                                <img key={i} src={item.product?.image_url} alt="" className="w-8 h-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-900" />
+                                                <div key={i} className="w-10 h-10 rounded-xl overflow-hidden border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-800 shadow-sm">
+                                                    <img src={item.product?.image_url} alt="" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-80" />
+                                                </div>
                                             ))}
                                             {order.items?.length > 3 && (
-                                                <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 ring-2 ring-white dark:ring-slate-900 flex items-center justify-center text-[9px] font-bold text-slate-600">
+                                                <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-slate-800 border-2 border-white dark:border-slate-800 flex items-center justify-center text-[9px] font-bold text-white dark:text-slate-300 tracking-widest shadow-sm">
                                                     +{order.items.length - 3}
                                                 </div>
                                             )}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-5">
-                                        <p className="font-black text-slate-900 dark:text-white">₹{Number(order.total_amount).toLocaleString()}</p>
+                                    <td className="px-8 py-5">
+                                        <p className="text-sm font-semibold text-slate-900 dark:text-white">₹{Number(order.total_amount).toLocaleString()}</p>
+                                        <p className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">{order.payment_method}</p>
                                     </td>
                                     {isAdmin && (
-                                        <td className="px-6 py-5">
-                                            <p className="font-bold text-emerald-600">₹{Number(order.admin_commission_amount || 0).toLocaleString()}</p>
+                                        <td className="px-8 py-5">
+                                            <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">₹{Number(order.admin_commission_amount || 0).toLocaleString()}</p>
                                         </td>
                                     )}
                                     {isSeller && (
-                                        <td className="px-6 py-5">
-                                            <p className="font-bold text-emerald-600">₹{Number(order.seller_amount || 0).toLocaleString()}</p>
+                                        <td className="px-8 py-5">
+                                            <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">₹{Number(order.seller_amount || 0).toLocaleString()}</p>
                                         </td>
                                     )}
-                                    <td className="px-6 py-5">
-                                        <span className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">{order.payment_method}</span>
-                                    </td>
-                                    <td className="px-6 py-5">
-                                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase ${statusColor(order.status)}`}>
-                                            <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
-                                            {order.status}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-5">
-                                        <div className="flex items-center justify-end gap-2">
-                                            <Link
-                                                href={ordersTrack({ id: order.id }).url()}
-                                                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
-                                                title="Track Order"
-                                            >
-                                                <span className="material-symbols-outlined text-[18px]">visibility</span>
-                                            </Link>
-                                            {/* Admin: approve / refund */}
-                                            {isAdmin && order.status === 'pending' && (
-                                                <button
-                                                    onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
-                                                    className="p-2 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-lg text-slate-400 hover:text-emerald-600 transition-all"
-                                                    title="Mark as Paid"
+                                    <td className="px-8 py-5">
+                                        <div className="flex items-center justify-end gap-3">
+                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[9px] font-semibold uppercase tracking-widest border ${statusColor(order.status)}`}>
+                                                <span className={`w-1 h-1 rounded-full ${order.status === 'paid' ? 'bg-emerald-500' : 'bg-current'}`}></span>
+                                                {order.status}
+                                            </span>
+                                            
+                                            <div className="flex items-center gap-1 ml-2">
+                                                <Link
+                                                    href={ordersTrack({ id: order.id }).url()}
+                                                    className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all"
+                                                    title="Trace Lifecycle"
                                                 >
-                                                    <span className="material-symbols-outlined text-[18px]">check_circle</span>
-                                                </button>
-                                            )}
-                                            {isAdmin && order.status === 'paid' && (
-                                                <button
-                                                    onClick={() => {
-                                                        if (confirm('Refund this order to customer wallet?')) {
-                                                            router.patch(adminOrdersRefund({ order: order.id }).url());
-                                                        }
-                                                    }}
-                                                    className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
-                                                    title="Refund Order"
-                                                >
-                                                    <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
-                                                </button>
-                                            )}
+                                                    <span className="material-symbols-outlined text-[18px]">visibility</span>
+                                                </Link>
+                                                {isAdmin && order.status === 'pending' && (
+                                                    <button
+                                                        onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
+                                                        className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-emerald-200 dark:hover:border-emerald-700 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-all"
+                                                        title="Authorize Payment"
+                                                    >
+                                                        <span className="material-symbols-outlined text-[18px]">check_circle</span>
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
                             )) : (
                                 <tr>
-                                    <td colSpan={10} className="px-6 py-20 text-center">
-                                        <div className="flex flex-col items-center gap-3 opacity-20">
-                                            <span className="material-symbols-outlined text-6xl">receipt_long</span>
-                                            <p className="font-bold">No orders found</p>
+                                    <td colSpan={10} className="px-8 py-32 text-center">
+                                        <div className="flex flex-col items-center gap-4 opacity-20 dark:opacity-40">
+                                            <span className="material-symbols-outlined text-7xl dark:text-white">receipt_long</span>
+                                            <p className="text-sm font-medium uppercase tracking-[0.2em] dark:text-white">Ledger is currently void.</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -168,7 +158,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
 
 OrderIndex.layout = (page: React.ReactNode) => {
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Orders', href: ordersIndex.url() },
+        { title: 'Ledger Audit', href: ordersIndex.url() },
     ];
     return <AppLayout breadcrumbs={breadcrumbs}>{page}</AppLayout>;
 };
