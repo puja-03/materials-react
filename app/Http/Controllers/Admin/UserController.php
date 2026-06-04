@@ -72,4 +72,12 @@ class UserController extends Controller
 
         return back()->with('success', "KYC status for {$user->name} updated to {$request->status}.");
     }
+
+    public function destroy(User $user)
+    {
+        $name = $user->name;
+        $user->delete();
+
+        return back()->with('success', "User {$name} deleted.");
+    }
 }
