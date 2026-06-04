@@ -25,12 +25,12 @@ export default function ProductListing({ products, categories }: { products: any
 
     const handleDelete = (id: number) => {
         if (confirm('Remove this product from the marketplace?')) {
-            router.delete(destroy({ product: id }).url());
+            router.delete(destroy.url(id));
         }
     };
 
     const handlePriceUpdate = (productId: number) => {
-        router.patch(adminProductsPrice({ product: productId }).url(), { price: newPrice }, {
+        router.patch(adminProductsPrice.url(productId), { price: newPrice }, {
             onSuccess: () => { setEditingPrice(null); setNewPrice(''); },
         });
     };
@@ -229,7 +229,7 @@ export default function ProductListing({ products, categories }: { products: any
                                         <td className="px-6 py-4">
                                             <div className="flex items-center justify-end gap-1">
                                                 <Link
-                                                    href={edit({ product: product.id }).url()}
+                                                    href={edit.url(product.id)}
                                                     className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
                                                     title="Edit"
                                                 >

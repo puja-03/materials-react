@@ -119,7 +119,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
                                             
                                             <div className="flex items-center gap-1 ml-2">
                                                 <Link
-                                                    href={ordersTrack({ id: order.id }).url()}
+                                                    href={ordersTrack.url(order.id)}
                                                     className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all"
                                                     title="Trace Lifecycle"
                                                 >
@@ -127,7 +127,7 @@ export default function OrderIndex({ orders }: { orders: any[] }) {
                                                 </Link>
                                                 {isAdmin && order.status === 'pending' && (
                                                     <button
-                                                        onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
+                                                        onClick={() => router.patch(adminOrdersStatus.url(order.id), { status: 'paid' })}
                                                         className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-emerald-200 dark:hover:border-emerald-700 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-all"
                                                         title="Authorize Payment"
                                                     >

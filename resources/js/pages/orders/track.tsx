@@ -31,7 +31,7 @@ export default function OrderTrack({ order }: { order: any }) {
     ];
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        <div className="p-6 space-y-8 animate-in fade-in duration-500">
             <Head title={`Order #${String(order.id).padStart(6, '0')} — Track`} />
 
             {/* Header */}
@@ -57,7 +57,7 @@ export default function OrderTrack({ order }: { order: any }) {
                     {/* Admin Actions */}
                     {isAdmin && order.status === 'pending' && (
                         <button
-                            onClick={() => router.patch(adminOrdersStatus({ order: order.id }).url(), { status: 'paid' })}
+                            onClick={() => router.patch(adminOrdersStatus.url(order.id), { status: 'paid' })}
                             className="flex items-center gap-2 bg-emerald-600 text-white font-bold px-4 py-2 rounded-xl text-sm hover:bg-emerald-700 transition-all"
                         >
                             <span className="material-symbols-outlined text-[18px]">check_circle</span>
@@ -66,7 +66,7 @@ export default function OrderTrack({ order }: { order: any }) {
                     )}
                     {isAdmin && order.status === 'paid' && (
                         <button
-                            onClick={() => { if (confirm('Issue full refund to customer wallet?')) router.patch(adminOrdersRefund({ order: order.id }).url()); }}
+                            onClick={() => { if (confirm('Issue full refund to customer wallet?')) router.patch(adminOrdersRefund.url(order.id)); }}
                             className="flex items-center gap-2 bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-sm hover:bg-blue-700 transition-all"
                         >
                             <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
