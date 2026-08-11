@@ -1898,16 +1898,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.9.1",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "73cb188c785abfa7a7bec73487148202968274c6"
+                "reference": "72e9a87efcf41a8e83be3ed0866b69d77565cb12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/73cb188c785abfa7a7bec73487148202968274c6",
-                "reference": "73cb188c785abfa7a7bec73487148202968274c6",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/72e9a87efcf41a8e83be3ed0866b69d77565cb12",
+                "reference": "72e9a87efcf41a8e83be3ed0866b69d77565cb12",
                 "shasum": ""
             },
             "require": {
@@ -2001,7 +2001,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-09T14:10:38+00:00"
+            "time": "2026-08-11T00:58:45+00:00"
         },
         {
             "name": "league/config",
@@ -8267,16 +8267,16 @@
         },
         {
             "name": "laravel/mcp",
-            "version": "v0.9.2",
+            "version": "v0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/mcp.git",
-                "reference": "2bb70c3662dfc2e2ff55c38a10ddf55bed2443b3"
+                "reference": "534b29f18418673033ec918c5a840b6ce9c08327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/mcp/zipball/2bb70c3662dfc2e2ff55c38a10ddf55bed2443b3",
-                "reference": "2bb70c3662dfc2e2ff55c38a10ddf55bed2443b3",
+                "url": "https://api.github.com/repos/laravel/mcp/zipball/534b29f18418673033ec918c5a840b6ce9c08327",
+                "reference": "534b29f18418673033ec918c5a840b6ce9c08327",
                 "shasum": ""
             },
             "require": {
@@ -8337,7 +8337,7 @@
                 "issues": "https://github.com/laravel/mcp/issues",
                 "source": "https://github.com/laravel/mcp"
             },
-            "time": "2026-08-06T15:59:47+00:00"
+            "time": "2026-08-10T18:01:31+00:00"
         },
         {
             "name": "laravel/pail",
@@ -8855,16 +8855,16 @@
         },
         {
             "name": "nunomaduro/pao",
-            "version": "v1.1.3",
+            "version": "v1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pao.git",
-                "reference": "322f22095f3639551b64db9a13dfd8ab09c8206b"
+                "reference": "5aee99c8c37565e9c457c33f4d36aa363a389dc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pao/zipball/322f22095f3639551b64db9a13dfd8ab09c8206b",
-                "reference": "322f22095f3639551b64db9a13dfd8ab09c8206b",
+                "url": "https://api.github.com/repos/laravel/pao/zipball/5aee99c8c37565e9c457c33f4d36aa363a389dc8",
+                "reference": "5aee99c8c37565e9c457c33f4d36aa363a389dc8",
                 "shasum": ""
             },
             "require": {
@@ -8878,15 +8878,15 @@
                 "phpunit/phpunit": "<12.5.23 || >=13.0.0 <13.1.7 || >=14.0.0"
             },
             "require-dev": {
-                "brianium/paratest": "^7.23.0",
-                "laravel/pint": "^1.30.0",
+                "brianium/paratest": "^7.20.0",
+                "laravel/pint": "^1.30.5",
                 "orchestra/testbench": "^10.11.0 || ^11.1.0",
-                "pestphp/pest": "^4.7.2 || ^5.0.1",
-                "pestphp/pest-plugin-type-coverage": "^4.0.4 || ^5.0.0",
-                "phpstan/phpstan": "^2.2.7",
-                "rector/rector": "^2.5.8",
-                "symfony/process": "^7.4.8 || ^8.1.0",
-                "symfony/var-dumper": "^7.4.8 || ^8.1.2"
+                "pestphp/pest": "^4.7.8 || ^5.1.0",
+                "pestphp/pest-plugin-type-coverage": "^4.0.4 || ^5.0.2",
+                "phpstan/phpstan": "^2.2.8",
+                "rector/rector": "^2.6.1",
+                "symfony/process": "^7.4.13 || ^8.1.0",
+                "symfony/var-dumper": "^7.4.15 || ^8.1.2"
             },
             "type": "library",
             "extra": {
@@ -8937,7 +8937,7 @@
                 "source": "https://github.com/laravel/pao"
             },
             "abandoned": "laravel/pao",
-            "time": "2026-07-29T18:38:14+00:00"
+            "time": "2026-08-10T23:45:44+00:00"
         },
         {
             "name": "pestphp/pest",
